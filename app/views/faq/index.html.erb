@@ -1,0 +1,41 @@
+<%= stylesheet_link_tag 'account'%>
+<%=render(:partial=>"shared/header",:object=>nil,:locals=>{:no_styles=>false})%>
+
+<div class="page_body">
+	<h3>FAQ</h3>
+	<%=link_to "Back to Map",:action=>:welcome,:controller=>:main%>
+	<div class="pretty_form" style="width:700px;font-size:10pt;">
+		<div class="pretty_form_header">How do I set up my subscription to vacationstxt.com?</div>
+		<div class="pretty_form_body">
+			<p>It's free to set up an account on vacationstxt.com.  However, if you want to list your property to be rented out, you will need to purchase a subscription.</p>
+			1) login to vacationstxt.com<br/>
+			2) click on the "Upgrade" link on your account page.<br/>
+			3) Choose the package that best suites you, and pay through paypal.<br/>
+			4) As soon as paypal notifies us of a successful transaction, your account will be updated.<br/>
+		</div>
+		<div class="pretty_form_header">How do I list one of my properties for vacation rental?</div>
+		<div class="pretty_form_body">
+			1) you must already have a subscription account (see above for details)<br/>
+			2) login to vacationstxt.com<br/>
+			3) you should be on your "account" page.<br/>
+			4) There will be a link in the right hand box that says "See my listings".  Click it.<br/>
+			5) You will now be on the "My Listings" page.<br/>
+			6) There is a link that says "Add new listing".  Click it.<br/>
+			7) You should see a form prompting you for all information necessary to list your property.<br/>
+			8) Fill out the form, and then click the "list" button.<br/>
+			9) The property is now listed on vacationstxt.com.  You can see it on your "My Listings" page, and users can find it on the map.<br/>
+		</div>
+		<div class="pretty_form_header">How does the booking process work?</div>
+		<div class="pretty_form_body">
+			<p>When a customer comes to vacationstxt.com looking for a place to stay, the following process occurs:</p>
+			1) The user searches on the map for property that matches their needs<br/>
+			2) The user picks several properties that he/she likes, and adds them to their pick list<br/>
+			3) The user enters the dates they are interested in and clicks "check availability"<br/>
+			4) The owner of each piece of property receives an SMS message (text message), telling them which property and what date.<br/>
+			5) The owner text's back "Y" if they want to rent out the property, "N" if it is unavailable that day. <br/>
+			6) The user picks one of the "Y" responses and books it<br/>
+			7) The owner of the chosen property receives an text message informing them that their property is booked.<br/>
+			8) Both parties receive contact information for each other<br/>
+		</div>
+	</div>
+</div>

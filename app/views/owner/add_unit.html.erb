@@ -1,0 +1,5 @@
+<%= stylesheet_link_tag 'account'%>
+<%=render(:partial=>"shared/header",:object=>nil,:locals=>{:no_styles=>false})%>
+<div class="page_body">
+	<%= render(:partial=>"unit_form",:object=>@unit,:locals=>{:post_action=>:exec_add_unit})%>
+</div>

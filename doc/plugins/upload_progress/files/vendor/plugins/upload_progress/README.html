@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>File: README</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../../../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+  <div id="fileHeader">
+    <h1>README</h1>
+    <table class="header-table">
+    <tr class="top-aligned-row">
+      <td><strong>Path:</strong></td>
+      <td>vendor/plugins/upload_progress/README
+      </td>
+    </tr>
+    <tr class="top-aligned-row">
+      <td><strong>Last Update:</strong></td>
+      <td>Fri Mar 21 22:21:57 -0500 2008</td>
+    </tr>
+    </table>
+  </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <h1>Overview</h1>
+<p>
+The upload progress plugin will alter your rails CGI handling to track the
+uploaded status of multipart/form encoded posts. The plugin will also add
+helper methods to create an AJAX updating progress bar.
+</p>
+<h2>Installing</h2>
+<p>
+Run &quot;script/plugin upload_progress&quot; or checkout the source into
+your plugins folder.
+</p>
+<pre>
+        svn checkout http://dev.rubyonrails.com/svn/plugins/upload_progress
+</pre>
+<p>
+Expand this archive in your RAILS_ROOT/vendor/plugins directory. The
+resulting plugin directory should look like:
+</p>
+<pre>
+        RAILS_ROOT/vendor/plugins/upload_progress/
+        RAILS_ROOT/vendor/plugins/upload_progress/README.txt
+        RAILS_ROOT/vendor/plugins/upload_progress/Rakefile
+        RAILS_ROOT/vendor/plugins/upload_progress/init.rb
+        RAILS_ROOT/vendor/plugins/upload_progress/public/
+        RAILS_ROOT/vendor/plugins/upload_progress/public/stylesheets/
+        RAILS_ROOT/vendor/plugins/upload_progress/public/stylesheets/upload_progress.css
+        RAILS_ROOT/vendor/plugins/upload_progress/lib/
+        RAILS_ROOT/vendor/plugins/upload_progress/doc/
+        RAILS_ROOT/vendor/plugins/upload_progress/test/
+</pre>
+<p>
+The stylesheets included in public/stylesheets are used as a guideline for
+styling your progress bar and status messages. You can copy them directly
+into your own public/stylesheets folder or copy and paste.
+</p>
+<h2>Documentation</h2>
+<p>
+You can create the documentation by running:
+</p>
+<pre>
+        rake rdoc
+</pre>
+<h2>Requirements</h2>
+<p>
+The requirments for getting periodic upload progress updates can be found
+here:
+</p>
+<p>
+<a
+href="http://sean.treadway.info/articles/2005/07/18/upload-progress-checklist">sean.treadway.info/articles/2005/07/18/upload-progress-checklist</a>
+</p>
+<h2>Credits</h2>
+<p>
+Sean Treadway &lt;seant@superchannel.org&gt; <a
+href="http://sean.treadway.info">sean.treadway.info</a> Thomas Fuchs
+&lt;thomas@fesch.at&gt; <a href="http://mir.aculo.us">mir.aculo.us</a>
+</p>
+<h2>License</h2>
+<p>
+This plugin is released under the MIT license. See MIT-LICENSE for details
+</p>
+
+    </div>
+
+
+   </div>
+
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+
+
+
+      
+
+
+    <!-- if method_list -->
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

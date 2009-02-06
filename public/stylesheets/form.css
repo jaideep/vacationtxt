@@ -1,0 +1,152 @@
+/* basic styles */
+
+
+
+
+/* #contact form tyles */
+
+#contact form {
+	width: 360px;
+	text-align: left;
+}
+
+fieldset {
+	margin: 0;
+	border: 0;
+	padding: 0;
+}
+
+legend {
+	display: none;
+}
+
+#contact form h3 {
+	clear: both;
+	padding: 5px 0px 10px 0px;
+	font-size: 14px;
+}
+
+#contact form label {
+	display: block;
+	width: 310px;
+	font-size: 12px;
+	line-height: 14px;
+	padding: 0px 0px 12px 0px;
+}
+
+#contact form input {
+	display: block;
+	margin-top: 3px;
+}
+
+#contact form select {
+	float: left;
+	display: block;
+}
+
+#contact form label.field-first,
+#contact form label.field-address,
+#contact form label.field-city,
+#contact form label.field-email {
+	clear: left;
+}
+
+
+#contact form label.field-first,
+#contact form label.field-last,
+#contact form label.field-city,
+#contact form label.field-email,
+#contact form label.field-phone {
+	float: left;
+	margin: 0px 10px 0px 0px;
+	width: 150px;
+}
+
+#contact form label.field-first input,
+#contact form label.field-last input,
+#contact form label.field-email input,
+#contact form label.field-city input,
+#contact form label.field-phone input {
+	float: left;
+	width: 150px;
+	padding: 0px;
+}
+
+#contact form label.field-state {
+	float: left;
+	margin-right: 10px;
+	width: 60px;
+}
+
+#contact form label.field-state select {
+	width: 60px;
+	float: left;
+	margin-top: 3px;
+}
+
+#contact form label.field-zip {
+	float: left;
+	width: 80px;
+}
+
+#contact form label.field-zip input {
+	float: left;
+	width: 80px;
+}
+
+#contact form label.field-address {
+	float: left;
+	width: 310px;
+	margin: 0px 0px 0px 0px;
+}
+
+#contact form label.field-address input {
+	float: left;
+	width: 310px;
+	padding: 0px;
+}
+
+#contact form input#radiobutton_1,
+#contact form input#radiobutton_2,
+#contact form input#radiobutton_3,
+#contact form input#radiobutton_4 {
+	clear: left;
+	float: left;
+	padding: 0px;
+	margin: 0px 0px 0px 0px;
+}
+
+#contact form label.radioitem {
+	clear: none;
+	margin: 0px 0px 0px 25px;
+	padding: 0px 0px 15px 0px;
+}
+
+textarea {
+	display: block;
+}
+
+#contact form input#checkbox_1,
+#contact form input#checkbox_2,
+#contact form input#checkbox_3 {
+	clear: both;
+	float: left;
+	padding: 0px;
+	margin: 0px;
+}
+
+#contact form label.field-checkbox {
+	clear: none;
+	margin: 0px 0px 0px 25px;
+	padding: 0px 0px 15px 0px;
+}
+
+#contact form textarea {
+	margin-top: 3px;
+}
+
+.contact strong{
+	display: block;
+	float: left;
+	width:100px;
+}

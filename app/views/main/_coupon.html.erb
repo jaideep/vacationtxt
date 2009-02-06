@@ -1,0 +1,24 @@
+<% if coupon %>
+<% discount = coupon %>
+<td class="<%= 'row_' + discount.category %>">
+  
+  <% check_box('item_' + discount.id.to_s, 'unchecked',  {}, '', '') %>
+  <% if discount.priority == 1 %>
+  	<%= image_tag(discount.url, :size=>"150x150") %>
+	</td><td class="<%= 'row_' + discount.category %>">
+  <% else %>
+    <%= image_tag(discount.url, :size=>"100x100") %><br/>
+  <% end %>
+  <%=h discount.description %><br/>
+  <%=h discount.start_date %> through <%=h discount.end_date %><br/>
+  <% if discount.sms_enabled %>
+    SMS supported<br/>
+  <% end %>
+  Coupon code: <%=h discount.coupon_code %>
+  <% form_remote_tag :url => { :action => :clip_coupon, :id => discount.id } do %>
+  	<%= submit_tag "Clip" %>&nbsp;
+	<%= link_to "Add to Trip",:action=>:add_discount,:controller=>:trip,:id=>discount.id%>
+  <% end %>
+  
+</td>
+<% end %>

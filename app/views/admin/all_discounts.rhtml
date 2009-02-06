@@ -1,0 +1,43 @@
+<style type="text/css">
+	td, th, tr, table{
+		border: solid thin black;
+	}
+</style>
+<h1>Listing discounts</h1>
+<%= page_entries_info @discounts %>
+<table>
+  <thead>
+  <tr>
+    <th>Map item</th>
+    <th>Coupon code</th>
+    <th>Image</th>
+    <th>Priority</th>
+    <th>Description</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>Sms enabled</th>
+  </tr>
+  </thead>
+  <tbody>
+<% for discount in @discounts %>
+  <tr>
+    <td><%=h discount.map_item_id %></td>
+    <td><%=h discount.coupon_code %></td>
+    <td><%= image_tag(discount.thumbnail_url) %></td>
+    <td><%=h discount.priority %></td>
+    <td><%=h discount.description %></td>
+    <td><%=h discount.start_date %></td>
+    <td><%=h discount.end_date %></td>
+    <td><%=h discount.sms_enabled %></td>
+<!--    <td><%= link_to 'Show', discount %></td> -->
+    <td><%= link_to 'Edit', :action => :edit_discount, :id => discount.id %></td>
+    <td><%= link_to 'Destroy', :action => :destroy_discount, :id => discount.id, 
+                               :confirm => 'Are you sure?' %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+<br />
+<%= will_paginate @discounts %>
+
+<%= link_to "Add Discount", :action=>:add_discount, :id=>@id %><br/>

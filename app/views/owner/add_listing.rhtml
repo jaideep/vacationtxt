@@ -1,0 +1,42 @@
+<%= stylesheet_link_tag 'account'%>
+<%= javascript_include_tag 'jquery', 'application'%>
+<%=render(:partial=>"shared/header",:object=>nil,:locals=>{:no_styles=>false})%>
+<div class="page_body">
+	<div class="pretty_form">
+		<div class="pretty_form_header"><b>New Listing:</b></div>
+
+		<div class="pretty_form_body">	
+		  <%= error_messages_for :listing -%>
+		  <% form_for :listing, :url => {:action => :exec_add_listing, :id => @listing},:html => { :multipart=>true} do |l|%>
+		    <b>LOCATION INFORMATION</b><br/>
+			<p>Street Address: <%= l.text_field :street_address%></p>
+		    <p>City:           <%= l.text_field :city%></p>
+			<p>State:          <%= l.text_field :state, :size=>2%>&nbsp;
+			   Zip Code:       <%= l.text_field :zip, :size=>10%></p>	
+			<br/>	
+			<b>OTHER INFO</b><br/>
+			<p>Listing Name(eg. Crows Nest, Paradise Isle, etc): <%= l.text_field :strong_name%></p>
+			<p>Pricing Type: <%= l.select :pricing_type,Listing.pricing_types%></p>
+		<!-- add first unit form -->
+		
+			<p>Region: <%= l.select :region,Listing::REGIONS%></p>
+			<p>Description: <br/> <%= l.text_area :description,:rows=>5%></p>
+			<b>PICTURES</b>
+			<!--p>
+				<label for='image_file_data' >Image File:</label>
+				<%= l.file_field :file_data %>
+			</p-->
+			<div id="listing_image_fields">
+				<p id='listing_image_tag'>
+					<label for='image_file_data' >Image File:</label>
+					<%= file_field_tag 'attachment_data[]' %> 
+					<%=link_to_function "remove", "removeImageField(this)"%>
+				</p>
+			</div>
+			<p><%=link_to_function "add image", "addImageField()"%></p>
+			<%= submit_tag("List") %>
+		  <% end %>
+		  <iframe id='upload_frame' name="upload_frame" style="width:1px;height:1px;border:0px" src="about:blank"></iframe>
+		</div>
+	</div>
+</div>

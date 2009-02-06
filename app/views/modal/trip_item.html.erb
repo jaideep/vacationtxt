@@ -1,0 +1,256 @@
+<html>
+	<head>
+		<style type="text/css">
+		address .street, address .city-state-zip{
+			display: block;
+		}
+		#trip_picture {
+			margin: 3px;
+			border: none;
+		}
+		#trip_modal_wrapper{
+			width: 600px;
+		}
+		#trip_modal_wrapper * {
+			font-family: "Trebuchet MS",Tahoma,Helvetica,Arial,sans-serif;
+			font-size: 12px;
+		}
+		#trip_listing_details *{
+			font-size: 14px;
+		}
+		#trip_modal_wrapper h3{
+			margin: 0;
+			padding: 2px;
+			font-size: 18px;
+		}
+		#calendar_footer div{
+			float: left;
+		}
+		#reservation-steps{
+			font-weight: bold;
+		}
+		#reservation-steps li{
+			font-size: 16px !important;
+			color: #ccc;
+		}
+		
+		#reservation-steps li.current{
+			color: #222;
+		}
+		
+		#pricing_box{
+			font-weight: bold;
+			font-size: 12pt;
+			position: absolute;
+			left: 350px;
+			bottom:170px;
+		}
+		
+		#pricing_status{
+			font-weight: bold;
+			font-size: 12pt;
+		}
+		
+		#availability_instructions{
+			font-size: 8pt;
+			width: 250px;
+			position: absolute;
+			right: 10px;
+			bottom: 100px;
+		}
+		</style>
+	</head>
+	<body>
+<div id="trip_modal_wrapper">
+<input id="trip_id" value="<%=@trip.id%>" type="hidden"/>
+
+<h3><%=@trip.name%></h3>
+<table width="100%">
+<tr valign="top">
+	<td class="thumbnail" width="33%">
+<% if @trip.has_picture? -%>
+		<div id="trip_picture" >
+		
+		  <%= image_tag(@trip.thumbnail_url)%> 
+		</div>
+<% end -%>
+	</td>
+	<td class="reserve-calendar" width="33%">
+<% if @trip.reservable? -%>
+	<div id="trip_calendar">
+		<% item = @trip.get_calendar_item(@trip.start.year,@trip.start.month)%>
+		<div id="calendar_holder">
+		<%= calendar({:year => @trip.start.year, :month => @trip.start.month}) do |d| 
+	 			[d.mday, {:class => getCssClassForDay(d,item)}]
+	        end %>
+			<input type="hidden" id="calendar_year" value="<%=Date.today.year%>"/>
+			<input type="hidden" id="calendar_month" value="<%=Date.today.month%>"/>
+			<input type="hidden" id="listing_id" value="<%=@trip.item_id%>"/>
+		</div>
+		<div id="calendar_footer">
+			<div id="prev_month_mini_button">
+				<%=image_tag("arrow_back_little.png")%>
+			</div>
+			<div id="listing_calendar_key">
+				<table>
+					<tbody>
+						<tr>
+							<td style="background-color:red">&nbsp;&nbsp;</td>
+							<td style="font-size:8pt;">Unavailable</td>
+						</tr>
+						<tr>
+							<td style="background-color:green">&nbsp;&nbsp;</td>
+							<td style="font-size:8pt;">Available</td>
+						</tr>
+						<tr>
+							<td style="background-color:white;border:black 1px solid;">&nbsp;&nbsp;</td>
+							<td style="font-size:8pt;">Check With Owner</td>
+						</tr>
+					</tbody>
+				</table>	
+			</div>
+			<div id="next_month_mini_button">
+				<%=image_tag("arrow_forward_little.png")%>
+			</div>
+		</div>
+	</div>
+<% end -%>
+	</td>
+	<td class="date-times" width="34%"> 
+		<div id="trip_date_time"><%=datetime_cells(@trip)%></div>
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+		<table id="trip_listing_details" width="100%">
+			<% if @trip.category == "LISTING" -%>
+			    <%@listing = @trip.item%>		    
+				<tr>
+					<td>Name</td>
+					<td><strong><%=@trip.name%></strong></td>
+				</tr>
+				<tr>
+					<td>
+						Description: 
+					</td>
+					<td>
+						<strong><%= @listing.description -%></strong>
+					</td>
+				</tr>
+				<tr>
+					<td>Seeping Configuration:</td>
+					<td>
+						<strong> Beds: </strong><span><%= @listing.bed_count -%></span>
+						<strong> Capacity: </strong><span><%= @listing.max_people -%></span>
+					</td>
+				</tr>
+				<tr>
+					<td>Price Per Night:</td>
+					<td><strong><%= "$#{@listing.price}" -%></strong></td>
+				</tr>
+				<% elsif @trip.category == "MAP_ITEM"%>
+				
+			     <% @item = @trip.item%>
+			      <tr>
+			      	<td><b>Description:</b></td>
+			      	<td><%= @item.description -%></td>	
+			      </tr>
+			      <% if @item.website_url -%>
+			       <tr><td><b>Website:</b></td><td> <a href="<%=@item.website_url -%>"><%= "#{@item.website_url}" -%></a></td></tr>
+			      <% end -%>
+			      <tr>
+			      	<td><b>Street Adress:</b></td>
+			      	<td>
+			      		<address>
+				      		<span class="street">
+				      		<%=@item.street_address -%>
+				      		</span>
+				      		<span class="city-state-zip">
+					        <%=@item.city%>, <%=@item.state%>, <%=@item.zip%>
+					        </span>
+			      		</address>
+			      	</td>
+			      </tr>
+			      
+			      <tr><td><b>Category:</b></td><td><%=@item.category%></td></tr>
+			      <tr><td><b>Phone:</b></td><td><%=@item.phone%></td></tr>
+				<% end %>
+				
+		</table>
+	</td>
+</tr>	
+</table>
+<% if @trip.reservable? -%>
+
+<p>To reserve this property, please complete the following steps:</p>
+<ol id="reservation-steps">
+	<% if  %w(PICKED).include?(@trip.status) %>
+		<li	class="current">
+	<% else %>
+		<li>
+	<% end %>
+		<% if @trip.status == 'PICKED' %>
+			<a href="#" class='trip_action_button <%= @trip.status%>'
+		       tag='<%= @trip.id%>'
+		       controller='trip'
+		       action='<%= action(@trip)%>'
+		       title='<%= statusText(@trip) %>'>
+		       Check availability <%=image_tag('contacting_small.jpg')%>
+		       </a>
+		<% else %>
+		Check availability
+		<% end %> 
+		
+		</li>
+	<li <% if  %w(QUERIED UNAVAILABLE).include?(@trip.status) %>class="current"<%end%>>
+		Available?
+		<% if  @trip.status == 'QUERIED' %>
+			<img src="/images/ajax-loader.gif">
+			<span class="QUERIED">Waiting for reply from owner...</span>
+		<% elsif %w(NOT_RESERVABLE UNAVAILABLE).include?(@trip.status)%>
+			<span style="font-color: red">Unavailable</span> (You may <a href="#" class='trip_action_button' tag='<%=@trip.id%>' controller='trip' action='update_date'>Change the date requested</a>)
+		<% elsif @trip.status != 'PICKED' %>
+			Available
+		<% end %>
+	</li>
+	<% if @trip.up_for_bid? -%>
+		<li <% if  %w(COUNTEROFFER).include?(@trip.status) %>class="current"<%end%>>
+			
+			<% if %w(AVAILABLE BOOKED).include?(@trip.status) -%>
+			 Pricing OK? OK!
+			<% elsif %w(PICKED QUERIED COUNTEROFFER).include?(@trip.status) -%>
+			 Pricing OK?
+			<% elsif %w(NOT_RESERVABLE UNAVAILABLE).include?(@trip.status) -%>
+			 Pricing OK? No.
+			<% end -%>
+		</li>
+	<% end -%>
+	<li <% if  %w(AVAILABLE COUNTEROFFER).include?(@trip.status) %>class="current"<%end%>>
+		<% if @trip.status == 'AVAILABLE' or @trip.status == 'COUNTEROFFER'%>
+			<span id="confirm_reservation_link"><a href="#" class='trip_action_button <%= @trip.status%>'
+		       tag='<%= @trip.id%>'
+		       controller='trip'
+		       action='<%= action(@trip)%>'
+		       title='<%= statusText(@trip) %>'>
+		       Confirm Reservation  <%=image_tag('contacting_small.jpg')%>
+		       </a></span>
+			<span id="confirm_reservation_text" style="display:none">Confirm Reservation</span>
+		<% else %>
+			Confirm Reservation
+		<% end %>
+	</li>
+	<li <% if @trip.status == 'BOOKED' %>class="current"<%end%>>
+		Reservation Confirmed
+	</li>
+	
+</ol>
+<div id="pricing_box"><%=bid_cell(@trip)%></div>
+	<% if @trip.status == 'QUERIED' -%>
+	    <p id="availability_instructions">The owner is being contacted.  You can wait, or you can continue browsing by clicking the "X" below (You'll get an SMS)</p>
+	<% end -%>
+<% end -%>
+<p style="text-align: center;"> <a href="/trip/remove/<%=@trip.id%>">Changed your mind? Click here to remove this property from your trip.</a></p>
+</div>
+
+	
+</body>

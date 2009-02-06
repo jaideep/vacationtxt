@@ -1,0 +1,6 @@
+page.replace_html("coupon_cart" , :partial => "coupon_cart" , :object => @clipped_coupons)
+page[:coupon_cart].visual_effect :blind_down if @clipped_coupons.size == 1
+page[:coupon_cart].visual_effect :highlight, 
+                                  :startcolor => "#88ff88" ,
+                                  :endcolor => "#114411"
+

@@ -1,0 +1,146 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+	<title>VacationsTxt.com: Your Portal to the Lake of the Ozarks</title>
+	<meta name="keywords" content="lake of the ozark resorts,ozark national golf course,Lake of the Ozarks Vacation Rentals,Lake Ozarks,Lake of the Ozarks,Lake Ozark MO Hotels,Lake Ozark Boat Rentals,Osage Beach MO Hotels,Lake Ozark MO Hotels,ozarks getaway,lake ozarks party cove,lake ozarks condo rental,lake ozarks cabin rentals,ozarks homes,ozarks cabins,ozarks now,ozarks cabin,ozarks house boat,lake ozarks events,central bank lake ozarks,spa shiki lake ozarks,ozarks vacation packages,lake ozarks real estate,shopping lake ozarks,ozarks natural foods"/>
+	<meta name="verify-v1" content="IwHAvF8h8ZFsPVGHnq0khLughUQYb3847o/lf/0o7FQ=" />
+<%= stylesheet_link_tag 'home', 'lightview' %>
+<%= stylesheet_link_tag 'modal_dialog'%>
+<%= stylesheet_link_tag 'pretty_form'%>
+<%= stylesheet_link_tag 'cool_blues'%>
+<%= stylesheet_link_tag 'calendariffic/calendar-blue.css' %>
+<%= stylesheet_link_tag '../javascripts/facebox/facebox' %>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAABjVjiyldHs7NWzGf1yW6qBSZx5FRUZhVrsf9MQllzc614kEypxQOA8m0_oIIyuYmmR5WeKcT1xzPcA"
+        type="text/javascript"></script>
+<%= javascript_include_tag 'calendariffic/calendar.js','calendariffic/calendar-setup.js', 'calendariffic/lang/calendar-en.js'%>
+<%= javascript_include_tag "extinfowindow"%>
+<%= javascript_include_tag "prototype"%>
+<%= javascript_include_tag "jquery"%>
+<%= javascript_include_tag "facebox/facebox"%>
+<%= javascript_include_tag "application"%>
+<%= javascript_include_tag "modal_dialog"%>
+<%= javascript_include_tag "maps_interop"%>
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.2/scriptaculous.js'></script>
+<%= javascript_include_tag 'lightview'%>
+</head>
+<body style="font-family:serif;" onload="initializeMap();" onunload="unloadMap();">	
+	<%=render(:partial=>"shared/header",:object=>nil,:locals=>{:no_styles=>true})%>
+	<div class="page_body">
+		<div id="left_column">
+			<div id="login_box">
+				<form action="/owner/activate_login" method="POST">
+				<table id="login_table">
+				<% if @customer -%>
+					<tr class="form_row">
+						<td class="label">Welcome</td>
+						<td class="text_field"><%=@customer.name%></td>
+					</tr>
+				<% else -%>
+					<tr class="form_row" style="height:30px;">
+						<td colspan="2" class="label"><a href="/faq/tutorial" id="tutorial_link">First time here?</a></td>
+					</tr>
+					<tr class="form_row">
+						<td class="label">Username</td>
+						<td class="text_field"><input class="home_input" type="text" id="username" name="username"/></td>
+					</tr>
+					<tr class="form_row">
+						<td class="label">Password</td>
+						<td class="text_field"><input class="home_input" type="password" id="password" name="password"/></td>
+					</tr>
+					<tr class="form_row">
+						<td class="label"><input type="submit" value="Login"></td>
+						<td class="label"><%=link_to "register",:action=>:register,:controller=>:customer%></td>
+					</tr>
+					<tr class="form_row">
+						<td class="label" colspan="2"><%=link_to "forgot my password",:action=>:forgot_password,:controller=>:customer%></td>
+					</tr>
+				<% end -%>
+				</table>
+				</form>
+			</div>
+			<p id="instructionalText">Click the tabs to the right of the map to begin planning your trip today!</p>
+			
+		</div>
+		<div id="center_map">
+			<div id="top_map_tabs" class="map_tabs_div">
+				<ul class="map_tabs">
+					<li class="map_tab"><a class="noPins" id="biz_search_link" href="#">Search for a Business </a></li>
+					<li class="map_tab" id="vacation_rental_tab" >
+						<a href="#" tag="VACATION_RENTAL" id="tab_VACATION_RENTAL" onclick="return false;">Vacation Rental</a>
+					</li>
+					<li class="map_tab"><a href="#" tag="LODGING" id="tab_LODGING" onclick="return false;">Lodging</a></li>
+					<li class="map_tab" ><a href="#" tag="FOOD" id="tab_FOOD" onclick="return false;">Dining</a></li>
+					<li class="map_tab" ><a href="#" tag="ENTERTAINMENT" id="tab_ENTERTAINMENT" onclick="return false;">Entertainment</a></li>
+					<li class="map_tab" ><a href="#" tag="NIGHTLIFE" id="tab_NIGHTLIFE" onclick="return false;">Nightlife</a></li>
+					<li class="map_tab" ><a href="#" tag="CHILDREN" id="tab_CHILDREN" onclick="return false;">Children</a></li>
+					<li class="map_tab" ><a href="#" tag="SHOPPING" id="tab_SHOPPING" onclick="return false;">Shopping</a></li>
+					<li class="map_tab" ><a href="#" tag="OUTDOOR" id="tab_OUTDOOR" onclick="return false;">Outdoor</a></li>
+					<li class="map_tab" ><a href="#" tag="TRANSPORTATION" id="tab_TRANSPORTATION" onclick="return false;">Transportation</a></li>
+					<li class="map_tab" ><a href="#" tag="TOURS" id="tab_TOURS" onclick="return false;">Tours</a></li>
+					<li class="map_tab" ><a href="#" tag="DISCOUNTS" id="tab_DISCOUNTS">Discounts </a></li>
+					<% if @customer -%>
+					  <li id="trip_tab" class="map_tab" ><a class="noPins" href="#" onclick="return false;">My Trip</a></li>
+					<% end -%>
+				</ul>
+			</div>
+			 <div id="map_canvas"></div>
+			 <% if @customer -%>
+			   <input type="button" id="trip_sms_button" value="Text my Trip to my Phone" />
+			 <% end -%>
+			 
+			 <p id="issue_report_link">Do you have a bug to report? or suggestions for new features? Contact us <%=link_to "Here",:action=>:report_issue%></p> 
+			
+		</div>	
+	</div>	
+	<div id="footer">
+	  &copy; 2008 VacationsTXT
+	</div>
+	<% if @search_context -%>
+		<div id="map_context" style="display:hidden;">
+			<% if @search_context[:bed_count] -%>
+			  <input id="context_bed_count" type="hidden" value="<%=@search_context[:bed_count]%>"/>
+			  <input id="context_max_people" type="hidden" value="<%=@search_context[:max_people]%>"/>
+			  <input id="context_max_price" type="hidden" value="<%=@search_context[:max_price]%>"/>
+			  <input id="context_region" type="hidden" value="<%=@search_context[:region]%>"/>
+			<% elsif @search_context[:category] -%>
+			  <input id="context_category" type="hidden" value="<%=@search_context[:category]%>"/>
+		    <% elsif @search_context[:map_item_id] -%>
+			  <input id="context_item_id" type="hidden" value="<%=@search_context[:map_item_id]%>"/>
+			<% elsif @search_context[:trip] -%>
+			  <input id="context_trip" type="hidden" value=""/>
+			<% end -%>
+		</div>
+	<% end -%>
+	<input type="hidden" id="trip_trigger" value="<%=(@see_trip ? "true" : "false")%>"/>
+	<input type="hidden" id="trip_item_trigger" value="<%=@see_trip_item%>"/>
+	
+	<!-- Start of Counters Code -->
+	<script type="text/javascript">
+	var sc_project=4421828;
+	var sc_invisible=1;
+	var sc_partition=55;
+	var sc_click_stat=1;
+	var sc_security="97eb0d7b";
+	</script>
+
+	<script type="text/javascript"
+	src="http://www.statcounter.com/counter/counter.js"></script><noscript><div
+	class="statcounter"><a title="customisable counter"
+	href="http://www.statcounter.com/free_hit_counter.html"
+	target="_blank"><img class="statcounter"
+	src="http://c.statcounter.com/4421828/0/97eb0d7b/1/" alt="customisable
+	counter" ></a></div></noscript>
+
+	<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ?
+	"https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost +
+	"google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+	</script>
+	<script type="text/javascript">
+	try {
+	var pageTracker = _gat._getTracker("UA-6649874-8");
+	pageTracker._trackPageview(); } catch(err) {}</script>
+	<!-- End of Counters Code -->
+</body>

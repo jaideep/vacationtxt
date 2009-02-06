@@ -1,0 +1,2 @@
+class OzarksException < RuntimeError
+end

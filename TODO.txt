@@ -1,0 +1,74 @@
+-Refresh search without paging the homepage.                                 |DONE|
+-Listing model gets unique name                                              |DONE|
+-Pick-list insert moves to right margin, no picture, just name, price.       |DONE|
+-pick-list page is the same for each step                                    |DONE|
+-maintain map search context (session?)                                      |DONE|
+-once booking is complete, clear pick_list and search_context                |DONE|
+-booking screen is confirmation, gives contact info for finalization         |DONE|
+-header goes away, becomes transparent background.                           |DONE|
+-positioning of dialog box (toward center)                                   |DONE|
+-drop debug timestamp from homepage                                          |DONE|
+-put a 3d-esque border on map                                                |DONE|
+-get rid of direction paragraph on                                           |DONE|
+-make map smaller and page margins bigger by 10-15%                          |DONE|
+-take out pick list partial for now, put in link with current count instead. |DONE| 
+-add calendar control for date selection on pick-list page					 |DONE|
+-fix: calendar 1 controls box 2, calender 2 does nothing                     |DONE|
+-fix: IE is sometimes not sending ajax request search properly               |DONE|
+-make all picklist status icons about half size                              |DONE|
+-fly pin images across screen                                                |DONE|
+-make same number of pins fly as number of search results.                   |DONE|
+-lose form on homepage, put icon in with magnifying glass and "search.       |DONE|
+-magnifying glass button opens search window on top of map, top left corner. |DONE|
+-search form needs to unfold from button                                     |DONE|
+-search form needs 'x'                                                       |DONE|
+-x on dialog box, top right                                                  |DONE|
+-make "how many single beds" into "single beds?" (make field smaller)        |DONE|
+-make "how many double beds" into "doubles?" (make field smaller)            |DONE|
+-make "maximum nightly rate" into "Max nightly rate?" (make field smaller)   |DONE|
+-table styles match color-scheme, and distribute to all table views.         |DONE|
+-make pins position relative to map.                                         |DONE|
+-make search form unroll from button directly below.                         |DONE|
+-get pictures uploaded to production site for listings                       |DONE|
+-if user is new, we should flash a cartoonish arrow pointing "push here".    |DONE|
+-update renter account page to show actual data                              |DONE|
+-build renter edit account page                                              |DONE|
+-default search to common profile (set in preferences screen)                |DONE|
+-if user is recognized, run default search (with preferred params)           |DONE|
+-add database indexes for performance                                        |DONE|
+-get tests passing 100%                                                      |DONE|
+-update homepage look to have 4 buttons
+-improve test coverage to a least 90%
+-The search glass needs to be glowing yellow and transparent          
+-search form needs better style
+-search form needs check in and check out 
+-on owners listing form, allow prices with dates, dynamic line addition.
+-flesh out customer screen: see my rentals (past, current, future)
+-rentals screen (order by date?)
+-customer preference: preferred ameneties, preferred activities
+-one pin color for noncompliance, one for partial compliance, one for full
+-put in a key for color coded pins, under the map.
+-when creating listing, allow owner to copy information from another listing.
+-show  form params in hole of magnifying glass?
+-clean up data in database, make data as realistic as possible.
+-in place editing for forms
+-drop in photo gallery
+-develop amenities list that owners can choose from for listing.
+-develop activities list that owners can choose from for listing.
+-owner needs to be able to store open and closed bookings.
+-owner needs type preference on price (fixed or indicative)
+-if it's indicative, customer makes a bid.
+-add field on pick list for specifying bid.
+-if calendar indicates booked, show unavailable automatically
+-if calendar indicates available, show available automatically
+-customer preference: map type default (satellite or road map or hybrid)
+-style top nav to look like tabs
+-set timeout ability for SMS and email, if no result by then default to unavailable
+-owner preference: availability window (how long does listing stay available)
+-fix: can't click on pins after dialog has been covering them (Firefox only)
+-greet user, offer ability to logout if not correct
+-on picklist, run progress animation while contacting  
+-get domain names for ozarkstxt.com, and vacationtxt.com
+-advertising icons (hotels, food, gas station).
+-send renter and owner email about results.
+-warn user when they may be offline.

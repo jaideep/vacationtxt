@@ -1,0 +1,6 @@
+<%= calendar({:year => @date.year, :month => @date.month}) do |d| 
+		[d.mday, {:class => getCssClassForDay(d,@listing_cal_item)}]
+    end %>
+<input type="hidden" id="calendar_year" value="<%=@date.year%>"/>
+<input type="hidden" id="calendar_month" value="<%=@date.month%>"/>
+<input type="hidden" id="listing_id" value="<%=@listing.id%>"/>

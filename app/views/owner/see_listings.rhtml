@@ -1,0 +1,50 @@
+<%= stylesheet_link_tag 'account', 'lightview'%>
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/prototype/1.6.0.3/prototype.js'></script>
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/scriptaculous/1.8.2/scriptaculous.js'></script>
+<%= javascript_include_tag 'lightview'%>
+<%=render(:partial=>"shared/header",:object=>nil,:locals=>{:no_styles=>false})%>
+<div class="page_body" style="position: inherit;">
+	<h3>My Listings</h3>
+	<%=link_to "My Account",:action=>:account%><br/>
+	<%=link_to "Add new listing",:action=>:add_listing %>
+	<div class="pretty_form" style="width:780px">
+	  	<table id="listings" class="pretty_table">
+		  	<thead>
+			  	<tr>  
+				  <th>Name:</th>
+				  <th>Units:</th>
+			      <th>Address:</th>
+				  <th>Pictures:</th>
+				  <th>Active:</th>
+				  <th width="100">Actions:</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @owner.listings.each do |listing| -%>
+				<tr class="<%=cycle("pretty_tr_one","pretty_tr_two")%>">
+				  <td><%= listing.strong_name%></td>
+				  <td><%= listing.listing_units.size %></td>
+				  <td>
+				  	<%= h(listing.street_address) -%> <br/>
+					<%= listing.city -%>, <%= listing.state -%>&nbsp;<%= listing.zip -%>
+				  </td>
+				  <td>
+				  	<%#image_tag picture_path(listing)%>
+					<%=listing_images_gallery(listing)%>
+				  </td>
+				  <td>
+				  	<%if listing.active -%>
+					  <%=image_tag("green_check_mark.gif") -%>
+					<%else -%>
+					  <%=image_tag("red_x.jpg") -%>
+					<%end -%>
+				  <td id="inline_buttons" width="170">
+					<%=link_to "Edit Details",:action=>:edit_listing,:id=>listing.id%>&nbsp;
+				  </td>
+				</tr>
+				<% end -%>
+			</tbody>
+		  </table>
+	</div>
+	<%=link_to "Add new listing",:action=>:add_listing %>
+</div>

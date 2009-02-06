@@ -1,0 +1,97 @@
+<div id="listing_box">
+	<div id="listing_left_bar">
+		<div id="listing_name"><%=@listing.name%></div>
+		<div>
+			<%=listing_images_gallery(@listing)%>
+		</div>
+		<%# image_tag(@listing.thumbnail_url,:id => 'listing_image')%>
+		<div id="listing_calendar">
+			<% item = @unit.get_calendar_item(Date.today.year,Date.today.month)%>
+			<div id="calendar_holder">
+			<%= calendar({:year => Date.today.year, :month => Date.today.month}) do |d| 
+		 			[d.mday, {:class => getCssClassForDay(d,item)}]
+		        end %>
+				<input type="hidden" id="calendar_year" value="<%=Date.today.year%>"/>
+				<input type="hidden" id="calendar_month" value="<%=Date.today.month%>"/>
+				<input type="hidden" id="listing_id" value="<%=@listing.id%>"/>
+			</div>
+			<div id="prev_month_mini_button">
+				<%=image_tag("arrow_back_little.png")%>
+			</div>
+			<div id="listing_calendar_key">
+				<table>
+					<tbody style="font-size:8pt;">
+						<tr>
+							<td style="background-color:red">&nbsp;&nbsp;</td>
+							<td>Unavailable</td>
+						</tr>
+						<tr>
+							<td style="background-color:green">&nbsp;&nbsp;</td>
+							<td>Available</td>
+						</tr>
+						<tr>
+							<td style="background-color:white;border:black 1px solid;">&nbsp;&nbsp;</td>
+							<td>Check With Owner</td>
+						</tr>
+					</tbody>
+				</table>	
+			</div>
+			<div id="next_month_mini_button">
+				<%=image_tag("arrow_forward_little.png")%>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div id="listing_units" class="pretty_form" style="width:380px;float:right;">
+		<table class="pretty_table">
+			<tr>
+				<th>Name</th>
+				<th>Price</th>
+				<th>Beds</th>
+				<th>Capacity</th>
+			</tr>
+			<% @listing.listing_units.each do |lu|%>
+			  <% rowclass = cycle("pretty_tr_one","pretty_tr_two")%>
+			  <tr class="<%= (@unit.id == lu.id) ? "selected_tr" : rowclass%> unit_row" tag="<%=lu.id%>" listing="<%=@listing.id%>">
+				<td><%=lu.strong_name%></td>
+				<td>$<%=lu.price%></td>
+				<td><%=lu.bed_count%></td>
+				<td><%=lu.max_people%></td>
+			  </tr>
+			<% end %>
+		</table>
+	</div>
+	<div id="listing_details">
+		<p><b>Description:</b> <br/> <%=@listing.description -%></p>
+		<p><%=@unit.description%></p>
+		<% if @user.nil? or !@user.on_trip(@unit) -%>
+		  <% form_tag :action=>:add_listing,:controller=>:trip,:id=>@unit.id do %>
+			<table>
+				<tbody>
+					<tr>
+		    			<td>From:</td> 
+						<td>
+<%= calendariffic_input(false,"start_date","/images/calendariffic/date.png","cal_start_img",'%m/%d/%Y',Date.today.strftime("%m/%d/%Y"),{:readonly=>'true',:size=>'10',:class=>"cal_box"},{:alt => 'cal'})%>
+		    at <%=select_time(@start_time,{:prefix=>"start_time",:twelve_hour=>true})%>
+						</td>
+					</tr>
+					<tr>
+						<td>To:</td>
+						<td> 
+						<%= calendariffic_input(false,"stop_date","/images/calendariffic/date.png","cal_stop_img",'%m/%d/%Y',(Date.today + 1.day).strftime("%m/%d/%Y"),{:readonly=>'true',:size=>'10',:class=>"cal_box"},{:alt => 'cal'})%>
+		    at <%=select_time(@stop_time,{:prefix=>"stop_time",:twelve_hour=>true})%>
+						</td>
+					</tr>
+				</tbody>
+			</table><br/>
+		    <%=submit_tag "Add to Trip" -%>
+		  <% end%>
+		<% end -%>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<div>&nbsp;</div>
+	</div>
+</div>

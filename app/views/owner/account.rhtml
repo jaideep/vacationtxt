@@ -1,0 +1,30 @@
+<%= stylesheet_link_tag 'account'%>
+<%=render(:partial=>"shared/header",:object=>nil,:locals=>{:no_styles=>false})%>
+<div class="page_body">
+	<div id="account_info" class="pretty_form">
+	  <div class="pretty_form_header"><b>Account Info:</b></div>
+	  <div class="pretty_form_body">
+	  	<b>Name:</b> &nbsp;<%=@owner.name%><br/>
+		<b>Address:</b><%=@owner.street_address%><br/>
+		<b>City:</b>&nbsp;<%=@owner.city%>&nbsp;&nbsp;
+		<b>State:</b>&nbsp;<%=@owner.state%>&nbsp;&nbsp;
+		<b>Zip:</b>&nbsp;<%=@owner.zip%><br/>
+		<b>email:</b> &nbsp;<%=@owner.email%><br/>
+		<b>mobile phone:</b>&nbsp;<%=@owner.phone%>
+	  <p><%= link_to "Edit Details",:action=>:edit_account%></p>
+	  </div>
+	</div>
+	<div id="account_actions" class="pretty_form">
+		<div class="pretty_form_header"><b>Actions</b></div>
+		<div class="pretty_form_body">
+			<div class="account_action">
+				<%=link_to image_tag("listing_house.gif"),:action=>:see_listings%> 
+				<%=link_to "See Listings",:action=>:see_listings%> 
+			</div>
+			<div class="account_action">
+				<%=link_to image_tag("world.gif"),:action=>:welcome,:controller=>:main%> 
+				<%=link_to "Search Map",:action=>:welcome,:controller=>:main%> 
+			</div>
+		</div>
+	</div>
+</div>

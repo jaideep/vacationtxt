@@ -1,0 +1,10 @@
+<div class="menu_closer" onclick="hideElement('destination_menu')"></div>
+<ul class="menu_list">
+	<% MapItem.categories.each do |cat|%>
+	<li>
+            <a id='<%= cat + "-destination-label" %>'
+               href="#" onclick="toggleOverlay('<%=cat%>')"><%= cat%>
+            </a>
+        </li>
+	<% end %>
+</ul>

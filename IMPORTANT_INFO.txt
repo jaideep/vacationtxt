@@ -1,0 +1,118 @@
+THIS FILE CONTAINS ALL PERTINANT INFORMATION FOR ACCESSING THE SERVER AT ENGINEYARD.COM
+ 
+YAHOO-GEOCODING-APPLICATION-ID: fkrK3rvV34EdrhpBOjZvecURLRbmnM0JFY9xahhgCUZjkVp1T7IQw6t5C7vtxtuDNDWu
+
+PAYPAL-SANDBOX credentials:
+  username: vacationstxt@gmail.com
+  password: evizitei1
+
+Sandbox Seller:
+  username: txt_se_1231006530_biz@gmail.com
+  password: txt_seller1
+
+Sanbox Buyer:
+  username: txt_buyer@gmail.com
+  password: txt_buyer1
+
+gmail
+  username: vacationstxt@gmail.com
+  password: evizitei1
+
+upsidewireless
+  username: evizitei
+  password: 62408TKB
+
+--- GETTING STARTED ---
+
+This email contains the information you need to immediately access your slice(s) at Engine Yard.
+
+The easiest way to ask questions about your setup is via the ticketing system.  It's available at http://engineyard.helpserve.com.  If you haven't gotten an esupport account yet please contact
+ticketing@engineyard.com to get setup.
+
+Another excellent way to get quick a response to some little detail you need to know is to use the #engineyard IRC channel on irc.freenode.net
+
+Additionally, we also have an Engine Yard forum where you can share in the experience of Engine Yard's support staff and other customers. The forum is available at http://forum.engineyard.com/
+
+If your production site is ever down or threatened in any way, shape or form, we're always available by phone at:
+
+ US: (866) 518-YARD (9273)
+ UK: 0800 0234 795
+
+We greatly appreciate your use of other methods of contact where appropriate. However, having one of our support people on the telephone calmly diagnosing a problem is often exactly the right thing during a time of stress, so keep that phone number handy. :-)
+
+--- ABOUT YOUR DEPLOYMENT ---
+
+You have 1 production and 0 staging slice(s).
+In order to get the application running, I had to comment out the following line in config/environments/production.rb:
+#config.action_view.cache_template_loading            = true
+
+--- SSH Information ---
+
+Your username and password is the same for all slices.
+
+ username      :  pass
+ -----------------------------
+ vacationstxt      :  t8LzXeHr
+
+Put this in ~/.ssh/config on your local computer to make connecting easy:
+------------cut--------------
+ ServerAliveInterval 60
+ ServerAliveCountMax 3 
+
+# production
+
+ Host ey05-s00096
+   Hostname     65.74.186.4
+   Port         8096
+   HostKeyAlias ey05-s00096
+   User         vacationstxt
+
+
+# staging
+
+------------cut--------------   
+
+Once that is in your ~/.ssh/config file then you can ssh to your slices like this:
+
+% ssh ey05-s00096
+
+--- Public Web Access ---
+Relevant IP information for accessing your website:
+Production: 65.74.185.59
+
+
+These are also the addresses you should use for A records if you control your own DNS.
+
+
+--- Slice Design ---
+
+Slices of the same environment (production or staging) share a filesystem that is mounted at /data. Everything you put in /data (your application lives here) is instantly available to the other slices in the same environment. This is one of the EY features that helps you scale easily.
+
+The staging slice is set up identically to the production slices except it has its own /data partition. So you can run your staging and demos on the exact same environment that will run in production.
+
+--- Deploying Your Application ---
+
+To use the deployment script, you must install the Engine Yard Capistrano gem, and be using Capistrano 2.0.
+
+
+The EY capistrano gem holds a set of useful tasks for deployment and debugging in EY environments. To install it:
+
+% gem install eycap --source http://gems.engineyard.com
+
+If you provided your application we have already deployed your site! In addition, we have attached your new deploy.rb file. Take this deploy.rb file and put it in the config directory of your app and check it into SVN. (Finally, if you have not already done so, please run "capify ." in root directory of your project.)
+
+Should you have any difficulty, please view this forum topic: http://forum.engineyard.com/forums/3
+
+Thanks!
+
+
+ENGINE YARD
+url - http://engineyard.helpserve.com
+group - VacationsTXT
+un - vacationstxt@gmail.com
+pw - kdmyncpaltx
+
+-- GEMS --
+
+yahoo-geocode
+rmagick

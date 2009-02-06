@@ -1,0 +1,8 @@
+<h2>res-txt admin screen</h2>
+<% if flash[:notice] -%>
+  <div id="flash"><%= flash[:notice] %></div><br/>
+<% end -%>
+<%= link_to "See All Map Items", :action=>:all_map_items%><br/>
+<%= link_to "Add Map Item", :action=>:add_map_item%><br/>
+<%= link_to "See All Discounts", :action=>:all_discounts%><br/>
+<%= link_to "Add Discount", :action=>:add_discount%><br/>

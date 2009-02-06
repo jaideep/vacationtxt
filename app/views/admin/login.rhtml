@@ -1,0 +1,6 @@
+<% if flash[:notice] -%>
+  <div id="flash"><%= flash[:notice] %></div>
+<% end -%>
+<% form_tag :action=>:exec_login do%>
+  Input admin password: <%= password_field_tag :password,params[:password]%>&nbsp;<%=submit_tag "Enter Admin Section"%>
+<%end%>

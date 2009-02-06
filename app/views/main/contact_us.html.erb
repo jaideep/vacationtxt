@@ -1,0 +1,52 @@
+<html>
+<head>
+	<Title>VactionTxt.com: Contact Us</Title>
+<%= stylesheet_link_tag 'form' %>
+</head>
+<body>
+<%=render(:partial=>"shared/header",:object=>nil,:locals=>{:no_styles=>false})%>
+<div class="page_body">
+	<div class="pretty_form" id="contact">
+		<div class="pretty_form_header">Contact Us </div>
+		<div class="pretty_form_body contact">
+		<p>For customer support:</p>
+		<p><strong>By Phone:</strong> <span class="contact-phone">1.573.424.4492</span></p>
+		<p><strong>By Email:</strong> <span class="contact-email">Becky@vacationstxt.com</span></p>
+		</div>
+		<div class="pretty_form_header">
+		Request Information
+		</div>
+		<div class="pretty_form_body" >
+		<%form_tag :controller=>"advertiser", :action=>:exec_contact_us do -%>
+		<fieldset>	
+			<label class="field-first">Name &#42;<%= text_field_tag :name%></label>
+			<label class="field-last">Business Name<%= text_field_tag :business_name%></label>
+			<label class="field-address">Home Address <%= text_field_tag :mail_address%></label>
+			<label class="field-city">City  <%= text_field_tag :city%></label>
+			<label class="field-state">State <select name="state"><option>AL</option><option>AK</option><option>AR</option><option>AZ</option><option>CA</option><option>CO</option><option>CT</option><option>DC</option><option>DE</option><option>FL</option><option>GA</option><option>HI</option><option>ID</option><option>IA</option><option>IL</option><option>IN</option><option>KS</option><option>KY</option><option>LA</option><option>MA</option><option>MD</option><option>ME</option><option>MI</option><option>MO</option><option>MN</option><option>MS</option><option>MT</option><option>NC</option><option>ND</option><option>NE</option><option>NH</option><option>NJ</option><option>NM</option><option>NY</option><option>NV</option><option>OH</option><option>OK</option><option>OR</option><option>PA</option><option>RI</option><option>SC</option><option>SD</option><option>TN</option><option>TX</option><option>UT</option><option>VA</option><option>VT</option><option>WA</option><option>WI</option><option>WV</option><option>WY</option></select></label>
+			<label class="field-zip">Zip Code <%= text_field_tag :zip,nil,{:size=>5}%></label><br style="clear: left;" />                     
+			<label class="field-email">Email &#42;<%= text_field_tag :email_address%></label>
+			<label class="field-phone">Phone<%= text_field_tag :phone%></label>
+			
+			<label class="field-last">I would like to <select name="request">
+										<option value="Add Business">add my business</option>
+										<option value="Request A Brochure">request a brochure</option>
+										<option value="Tech Support">request technical support</option>
+										<option value="Customer Support">request customer support</option>
+									  </select>
+			</label>
+		</fieldset>		
+		<fieldset>
+			<label>Click &#8220;Submit&#8221; below!</label>
+			<%=submit_tag "Submit"%>
+			<input type="hidden" name="submitted" value="TRUE" />
+		</fieldset>
+			<% end -%>
+			<!--
+			
+			
+			-->
+		</div>
+	</div>
+</div>
+</body>

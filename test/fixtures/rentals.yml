@@ -1,0 +1,25 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+charvels_honeymoon:
+  user_id: 3
+  listing_id: 2
+  price: 751.99
+  confirmed_date: 02/1/2008
+  rental_date: 05/15/2008
+  rental_date_end: 05/17/2008
+
+charvels_vacation:
+  user_id: 3
+  listing_id: 2
+  price: 231.15
+  confirmed_date: 02/20/2008
+  rental_date: 07/15/2008
+  rental_date_end: 07/29/2008
+
+charvels_business_trip:
+  user_id: 3
+  listing_id: 2
+  price: 500.00
+  confirmed_date: 02/20/2008
+  rental_date: 03/15/2008
+  rental_date_end: 03/25/2008

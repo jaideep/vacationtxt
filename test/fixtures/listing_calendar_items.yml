@@ -1,0 +1,32 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+feb_item:
+  id: 1
+  listing_unit_id: 1
+  month: 2
+  year: 2008
+  availability: 0000AA0000000000000000000000000
+mar_item:
+  id: 2
+  listing_unit_id: 1
+  month: 3
+  year: 2008
+  availability: 0000AA0000000000000000000000000
+apr_item_1:
+  id: 3
+  listing_unit_id: 1
+  month: 4
+  year: 2008
+  availability: 0000AA0000000000000AAAAAAA00000
+may_item_1:
+  id: 4
+  listing_unit_id: 1
+  month: 5
+  year: 2008
+  availability: 0A00AAAA000UUUUU000AAAAAAA000AA
+june_item:
+  id: 5
+  listing_unit_id: 1
+  month: 6
+  year: 2008
+  availability: A0U0AAAA000UUUUU000AAAAAAA000AA

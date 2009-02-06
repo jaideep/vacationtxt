@@ -1,0 +1,889 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html 
+     PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Module: UploadProgress::UploadProgressHelper</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+  <meta http-equiv="Content-Script-Type" content="text/javascript" />
+  <link rel="stylesheet" href="../.././rdoc-style.css" type="text/css" media="screen" />
+  <script type="text/javascript">
+  // <![CDATA[
+
+  function popupCode( url ) {
+    window.open(url, "Code", "resizable=yes,scrollbars=yes,toolbar=no,status=no,height=150,width=400")
+  }
+
+  function toggleCode( id ) {
+    if ( document.getElementById )
+      elem = document.getElementById( id );
+    else if ( document.all )
+      elem = eval( "document.all." + id );
+    else
+      return false;
+
+    elemStyle = elem.style;
+    
+    if ( elemStyle.display != "block" ) {
+      elemStyle.display = "block"
+    } else {
+      elemStyle.display = "none"
+    }
+
+    return true;
+  }
+  
+  // Make codeblocks hidden by default
+  document.writeln( "<style type=\"text/css\">div.method-source-code { display: none }</style>" )
+  
+  // ]]>
+  </script>
+
+</head>
+<body>
+
+
+
+    <div id="classHeader">
+        <table class="header-table">
+        <tr class="top-aligned-row">
+          <td><strong>Module</strong></td>
+          <td class="class-name-in-header">UploadProgress::UploadProgressHelper</td>
+        </tr>
+        <tr class="top-aligned-row">
+            <td><strong>In:</strong></td>
+            <td>
+                <a href="../../files/vendor/plugins/upload_progress/lib/upload_progress_helper_rb.html">
+                vendor/plugins/upload_progress/lib/upload_progress_helper.rb
+                </a>
+        <br />
+            </td>
+        </tr>
+
+        </table>
+    </div>
+  <!-- banner header -->
+
+  <div id="bodyContent">
+
+
+
+  <div id="contextContent">
+
+    <div id="description">
+      <p>
+Provides a set of methods to be used in your views to help with the
+rendering of Ajax enabled status updating during a multipart upload.
+</p>
+<p>
+The basic mechanism for upload progress is that the form will post to a
+hidden &lt;iframe&gt; element, then poll a status action that will replace
+the contents of a status container. Client Javascript hooks are provided
+for <tt>begin</tt> and <tt>finish</tt> of the update.
+</p>
+<p>
+If you wish to have a DTD that will validate this page, use XHTML
+Transitional because this DTD supports the &lt;iframe&gt; element.
+</p>
+<h2>Typical usage</h2>
+<p>
+In your upload view:
+</p>
+<pre>
+  &lt;%= form_tag_with_upload_progress({ :action =&gt; 'create' }) %&gt;
+    &lt;%= file_field &quot;document&quot;, &quot;file&quot; %&gt;
+    &lt;%= submit_tag &quot;Upload&quot; %&gt;
+    &lt;%= upload_status_tag %&gt;
+  &lt;%= end_form_tag %&gt;
+</pre>
+<p>
+In your controller:
+</p>
+<pre>
+  class DocumentController &lt; ApplicationController
+    upload_status_for  :create
+
+    def create
+      # ... Your document creation action
+    end
+  end
+</pre>
+<h2>Javascript callback on begin and finished</h2>
+<p>
+In your upload view:
+</p>
+<pre>
+  &lt;%= form_tag_with_upload_progress({ :action =&gt; 'create' }, {
+      :begin =&gt; &quot;alert('upload beginning'),
+      :finish =&gt; &quot;alert('upload finished')}) %&gt;
+    &lt;%= file_field &quot;document&quot;, &quot;file&quot; %&gt;
+    &lt;%= submit_tag &quot;Upload&quot; %&gt;
+    &lt;%= upload_status_tag %&gt;
+  &lt;%= end_form_tag %&gt;
+</pre>
+<h2>CSS Styling of the status text and progress bar</h2>
+<p>
+See <tt><a
+href="UploadProgressHelper.html#M000005">upload_status_text_tag</a></tt>
+and <tt><a
+href="UploadProgressHelper.html#M000006">upload_status_progress_bar_tag</a></tt>
+for references of the IDs and CSS classes used.
+</p>
+<p>
+Default styling is included with the scaffolding CSS.
+</p>
+
+    </div>
+
+
+   </div>
+
+    <div id="method-list">
+      <h3 class="section-bar">Methods</h3>
+
+      <div class="name-list">
+      <a href="#M000003">finish_upload_status</a>&nbsp;&nbsp;
+      <a href="#M000002">form_tag_with_upload_progress</a>&nbsp;&nbsp;
+      <a href="#M000011">progress_bar_id</a>&nbsp;&nbsp;
+      <a href="#M000012">status_tag_id</a>&nbsp;&nbsp;
+      <a href="#M000007">upload_progress_status</a>&nbsp;&nbsp;
+      <a href="#M000009">upload_progress_text</a>&nbsp;&nbsp;
+      <a href="#M000008">upload_progress_update_bar_js</a>&nbsp;&nbsp;
+      <a href="#M000006">upload_status_progress_bar_tag</a>&nbsp;&nbsp;
+      <a href="#M000004">upload_status_tag</a>&nbsp;&nbsp;
+      <a href="#M000005">upload_status_text_tag</a>&nbsp;&nbsp;
+      <a href="#M000013">upload_target_id</a>&nbsp;&nbsp;
+      <a href="#M000010">upload_update_object</a>&nbsp;&nbsp;
+      </div>
+    </div>
+
+  </div>
+
+
+    <!-- if includes -->
+
+    <div id="section">
+
+
+    <div id="constants-list">
+      <h3 class="section-bar">Constants</h3>
+
+      <div class="name-list">
+        <table summary="Constants">
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">FREQUENCY</td>
+          <td>=</td>
+          <td class="context-item-value">2.0</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Default number of seconds between client updates
+
+</td>
+        </tr>
+        <tr class="top-aligned-row context-row">
+          <td class="context-item-name">FREQUENCY_DECAY</td>
+          <td>=</td>
+          <td class="context-item-value">1.8</td>
+          <td width="3em">&nbsp;</td>
+          <td class="context-item-desc">
+Factor to decrease the frequency when the <tt>upload_status</tt> action
+returns the same results To disable update decay, set this constant to
+<tt>false</tt>
+
+</td>
+        </tr>
+        </table>
+      </div>
+    </div>
+
+
+
+      
+
+
+    <!-- if method_list -->
+    <div id="methods">
+      <h3 class="section-bar">Public Instance methods</h3>
+
+      <div id="method-M000003" class="method-detail">
+        <a name="M000003"></a>
+
+        <div class="method-heading">
+          <a href="#M000003" class="method-signature">
+          <span class="method-name">finish_upload_status</span><span class="method-args">(options = {})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+This method must be called by the action that receives the form post with
+the <tt>upload_progress</tt>. By default this method is rendered when the
+controller declares that the action is the receiver of a <tt><a
+href="UploadProgressHelper.html#M000002">form_tag_with_upload_progress</a></tt>
+posting.
+</p>
+<p>
+This template will do a javascript redirect to the URL specified in
+<tt>redirect_to</tt> if this method is called anywhere in the controller
+action. When the action performs a redirect, the <tt>finish</tt> handler
+will not be called.
+</p>
+<p>
+If there are errors in the action then you should set the controller
+instance variable +@errors+. The +@errors+ object will be converted to a
+javascript array from +@errors.full_messages+ and passed to the
+<tt>finish</tt> handler of <tt><a
+href="UploadProgressHelper.html#M000002">form_tag_with_upload_progress</a></tt>
+</p>
+<p>
+If no errors have occured, the parameter to the <tt>finish</tt> handler
+will be <tt>undefined</tt>.
+</p>
+<h2>Example (in view)</h2>
+<pre>
+ &lt;script&gt;
+  function do_finish(errors) {
+    if (errors) {
+      alert(errors);
+    }
+  }
+ &lt;/script&gt;
+
+ &lt;%= form_tag_with_upload_progress {:action =&gt; 'create'}, {finish =&gt; 'do_finish(arguments[0])'} %&gt;
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000003-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000003-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/upload_progress/lib/upload_progress_helper.rb, line 253</span>
+253:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">finish_upload_status</span>(<span class="ruby-identifier">options</span> = {})
+254:       <span class="ruby-comment cmt"># Always trigger the stop/finish callback</span>
+255:       <span class="ruby-identifier">js</span> = <span class="ruby-node">&quot;parent.#{upload_update_object}.stop(#{options[:client_js_argument]});\n&quot;</span>
+256: 
+257:       <span class="ruby-comment cmt"># Redirect if redirect_to was called in controller</span>
+258:       <span class="ruby-identifier">js</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;parent.location.replace('#{escape_javascript options[:redirect_to]}');\n&quot;</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:redirect_to</span>].<span class="ruby-identifier">blank?</span>
+259: 
+260:       <span class="ruby-comment cmt"># Guard against multiple triggers/redirects on back</span>
+261:       <span class="ruby-identifier">js</span> = <span class="ruby-node">&quot;if (parent.#{upload_update_object}) { #{js} }\n&quot;</span>
+262:       
+263:       <span class="ruby-identifier">content_tag</span>(<span class="ruby-value str">&quot;html&quot;</span>, 
+264:         <span class="ruby-identifier">content_tag</span>(<span class="ruby-value str">&quot;head&quot;</span>, 
+265:           <span class="ruby-identifier">content_tag</span>(<span class="ruby-value str">&quot;script&quot;</span>, <span class="ruby-node">&quot;function finish() { #{js} }&quot;</span>, 
+266:             {<span class="ruby-identifier">:type</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;text/javascript&quot;</span>, <span class="ruby-identifier">:language</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">&quot;javascript&quot;</span>})) <span class="ruby-operator">+</span> 
+267:         <span class="ruby-identifier">content_tag</span>(<span class="ruby-value str">&quot;body&quot;</span>, <span class="ruby-value str">''</span>, <span class="ruby-identifier">:onload</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'finish()'</span>))
+268:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000002" class="method-detail">
+        <a name="M000002"></a>
+
+        <div class="method-heading">
+          <a href="#M000002" class="method-signature">
+          <span class="method-name">form_tag_with_upload_progress</span><span class="method-args">(url_for_options = {}, options = {}, status_url_for_options = {}, *parameters_for_url_method)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Creates a form tag and hidden &lt;iframe&gt; necessary for the upload
+progress status messages to be displayed in a designated <tt>div</tt> on
+your page.
+</p>
+<h2>Initializations</h2>
+<p>
+When the upload starts, the content created by <tt><a
+href="UploadProgressHelper.html#M000004">upload_status_tag</a></tt> will be
+filled out with &quot;Upload starting&#8230;&quot;. When the upload is
+finished, &quot;Upload finished.&quot; will be used. Every update inbetween
+the begin and finish events will be determined by the server
+<tt>upload_status</tt> action. Doing this automatically means that the user
+can use the same form to upload multiple files without refreshing page
+while still displaying a reasonable progress.
+</p>
+<h2>Upload IDs</h2>
+<p>
+For the view and the controller to know about the same upload they must
+share a common <tt>upload_id</tt>. <tt><a
+href="UploadProgressHelper.html#M000002">form_tag_with_upload_progress</a></tt>
+prepares the next available <tt>upload_id</tt> when called. There are other
+methods which use the <tt>upload_id</tt> so the order in which you include
+your content is important. Any content that depends on the
+<tt>upload_id</tt> will use the one defined <tt><a
+href="UploadProgressHelper.html#M000002">form_tag_with_upload_progress</a></tt>
+otherwise you will need to explicitly declare the <tt>upload_id</tt> shared
+among your progress elements.
+</p>
+<p>
+Status container after the form:
+</p>
+<pre>
+  &lt;%= form_tag_with_upload_progress %&gt;
+  &lt;%= end_form_tag %&gt;
+
+  &lt;%= upload_status_tag %&gt;
+</pre>
+<p>
+Status container before form:
+</p>
+<pre>
+  &lt;% my_upload_id = next_upload_id %&gt;
+
+  &lt;%= upload_status_tag %&gt;
+
+  &lt;%= form_tag_with_upload_progress :upload_id =&gt; my_upload_id %&gt;
+  &lt;%= end_form_tag %&gt;
+</pre>
+<p>
+It is recommended that the helpers manage the <tt>upload_id</tt> parameter.
+</p>
+<h2>Options</h2>
+<p>
+<tt><a
+href="UploadProgressHelper.html#M000002">form_tag_with_upload_progress</a></tt>
+uses similar options as <tt>form_tag</tt> yet accepts another hash for the
+options used for the <tt>upload_status</tt> action.
+</p>
+<table>
+<tr><td valign="top"><tt>url_for_options</tt>:</td><td>The same options used by <tt>form_tag</tt> including:
+
+</td></tr>
+<tr><td valign="top"><tt>:upload_id</tt>:</td><td>the upload id used to uniquely identify this upload
+
+</td></tr>
+<tr><td valign="top"><tt>options</tt>:</td><td>similar options to <tt>form_tag</tt> including:
+
+</td></tr>
+<tr><td valign="top"><tt>:begin</tt>:</td><td>Javascript code that executes before the first status update occurs.
+
+</td></tr>
+<tr><td valign="top"><tt>:finish</tt>:</td><td>Javascript code that executes after the action that receives the post
+returns.
+
+</td></tr>
+<tr><td valign="top"><tt>:frequency</tt>:</td><td>number of seconds between polls to the upload status action.
+
+</td></tr>
+<tr><td valign="top"><tt>status_url_for_options</tt>:</td><td>options passed to <tt>url_for</tt> to build the url
+
+</td></tr>
+</table>
+<p>
+for the upload status action.
+</p>
+<table>
+<tr><td valign="top"><tt>:controller</tt>:</td><td>defines the controller to be used for a custom update status action
+
+</td></tr>
+<tr><td valign="top"><tt>:action</tt>:</td><td>defines the action to be used for a custom update status action
+
+</td></tr>
+</table>
+<p>
+Parameters passed to the action defined by status_url_for_options
+</p>
+<table>
+<tr><td valign="top"><tt>:upload_id</tt>:</td><td>the upload_id automatically generated by <tt><a
+href="UploadProgressHelper.html#M000002">form_tag_with_upload_progress</a></tt>
+or the user defined id passed to this method.
+
+</td></tr>
+</table>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000002-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000002-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/upload_progress/lib/upload_progress_helper.rb, line 141</span>
+141:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">form_tag_with_upload_progress</span>(<span class="ruby-identifier">url_for_options</span> = {}, <span class="ruby-identifier">options</span> = {}, <span class="ruby-identifier">status_url_for_options</span> = {}, <span class="ruby-operator">*</span><span class="ruby-identifier">parameters_for_url_method</span>)
+142:       
+143:       <span class="ruby-comment cmt">## Setup the action URL and the server-side upload_status action for</span>
+144:       <span class="ruby-comment cmt">## polling of status during the upload</span>
+145: 
+146:       <span class="ruby-identifier">options</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">dup</span>
+147: 
+148:       <span class="ruby-identifier">upload_id</span> = <span class="ruby-identifier">url_for_options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">:upload_id</span>) <span class="ruby-operator">||</span> <span class="ruby-identifier">next_upload_id</span>
+149:       <span class="ruby-identifier">upload_action_url</span> = <span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">url_for_options</span>)
+150: 
+151:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">status_url_for_options</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Hash</span>
+152:         <span class="ruby-identifier">status_url_for_options</span> = <span class="ruby-identifier">status_url_for_options</span>.<span class="ruby-identifier">merge</span>({
+153:           <span class="ruby-identifier">:action</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'upload_status'</span>, 
+154:           <span class="ruby-identifier">:upload_id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">upload_id</span>})
+155:       <span class="ruby-keyword kw">end</span>
+156: 
+157:       <span class="ruby-identifier">status_url</span> = <span class="ruby-identifier">url_for</span>(<span class="ruby-identifier">status_url_for_options</span>)
+158:       
+159:       <span class="ruby-comment cmt">## Prepare the form options.  Dynamically change the target and URL to enable the status</span>
+160:       <span class="ruby-comment cmt">## updating only if javascript is enabled, otherwise perform the form submission in the same </span>
+161:       <span class="ruby-comment cmt">## frame.</span>
+162:       
+163:       <span class="ruby-identifier">upload_target</span> = <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:target</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">upload_target_id</span>
+164:       <span class="ruby-identifier">upload_id_param</span> = <span class="ruby-node">&quot;#{upload_action_url.include?('?') ? '&amp;' : '?'}upload_id=#{upload_id}&quot;</span>
+165:       
+166:       <span class="ruby-comment cmt">## Externally :begin and :finish are the entry and exit points</span>
+167:       <span class="ruby-comment cmt">## Internally, :finish is called :complete</span>
+168: 
+169:       <span class="ruby-identifier">js_options</span> = {
+170:         <span class="ruby-identifier">:decay</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:decay</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">FREQUENCY_DECAY</span>,
+171:         <span class="ruby-identifier">:frequency</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:frequency</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">FREQUENCY</span>,
+172:       }
+173: 
+174:       <span class="ruby-identifier">updater_options</span> = <span class="ruby-value str">'{'</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">js_options</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;#{k}:#{v}&quot;</span>}.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">','</span>) <span class="ruby-operator">+</span> <span class="ruby-value str">'}'</span>
+175: 
+176:       <span class="ruby-comment cmt">## Finish off the updating by forcing the progress bar to 100% and status text because the</span>
+177:       <span class="ruby-comment cmt">## results of the post may load and finish in the IFRAME before the last status update</span>
+178:       <span class="ruby-comment cmt">## is loaded. </span>
+179: 
+180:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:complete</span>] = <span class="ruby-node">&quot;$('#{status_tag_id}').innerHTML='#{escape_javascript upload_progress_text(:finish)}';&quot;</span>
+181:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:complete</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{upload_progress_update_bar_js(100)};&quot;</span>
+182:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:complete</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{upload_update_object} = null&quot;</span>
+183:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:complete</span>] = <span class="ruby-node">&quot;#{options[:complete]}; #{options[:finish]}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:finish</span>]
+184: 
+185:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:script</span>] = <span class="ruby-keyword kw">true</span>
+186: 
+187:       <span class="ruby-comment cmt">## Prepare the periodic updater, clearing any previous updater</span>
+188: 
+189:       <span class="ruby-identifier">updater</span> = <span class="ruby-node">&quot;if (#{upload_update_object}) { #{upload_update_object}.stop(); }&quot;</span>
+190:       <span class="ruby-identifier">updater</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{upload_update_object} = new Ajax.PeriodicalUpdater('#{status_tag_id}',&quot;</span>
+191:       <span class="ruby-identifier">updater</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;'#{status_url}', Object.extend(#{options_for_ajax(options)},#{updater_options}))&quot;</span>
+192: 
+193:       <span class="ruby-identifier">updater</span> = <span class="ruby-node">&quot;#{options[:begin]}; #{updater}&quot;</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:begin</span>]
+194:       <span class="ruby-identifier">updater</span> = <span class="ruby-node">&quot;#{upload_progress_update_bar_js(0)}; #{updater}&quot;</span>
+195:       <span class="ruby-identifier">updater</span> = <span class="ruby-node">&quot;$('#{status_tag_id}').innerHTML='#{escape_javascript upload_progress_text(:begin)}'; #{updater}&quot;</span>
+196:       
+197:       <span class="ruby-comment cmt">## Touch up the form action and target to use the given target instead of the</span>
+198:       <span class="ruby-comment cmt">## default one. Then start the updater</span>
+199: 
+200:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:onsubmit</span>] = <span class="ruby-node">&quot;if (this.action.indexOf('upload_id') &lt; 0){ this.action += '#{escape_javascript upload_id_param}'; }&quot;</span>
+201:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:onsubmit</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;this.target = '#{escape_javascript upload_target}';&quot;</span>
+202:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:onsubmit</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{updater}; return true&quot;</span> 
+203:       <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:multipart</span>] = <span class="ruby-keyword kw">true</span>
+204: 
+205:       [<span class="ruby-identifier">:begin</span>, <span class="ruby-identifier">:finish</span>, <span class="ruby-identifier">:complete</span>, <span class="ruby-identifier">:frequency</span>, <span class="ruby-identifier">:decay</span>, <span class="ruby-identifier">:script</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">sym</span><span class="ruby-operator">|</span> <span class="ruby-identifier">options</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">sym</span>) }
+206: 
+207:       <span class="ruby-comment cmt">## Create the tags</span>
+208:       <span class="ruby-comment cmt">## If a target for the form is given then avoid creating the hidden IFRAME</span>
+209: 
+210:       <span class="ruby-identifier">tag</span> = <span class="ruby-identifier">form_tag</span>(<span class="ruby-identifier">upload_action_url</span>, <span class="ruby-identifier">options</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">parameters_for_url_method</span>)
+211: 
+212:       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">options</span>[<span class="ruby-identifier">:target</span>]
+213:         <span class="ruby-identifier">tag</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">content_tag</span>(<span class="ruby-value str">'iframe'</span>, <span class="ruby-value str">''</span>, { 
+214:           <span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">upload_target</span>, 
+215:           <span class="ruby-identifier">:name</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">upload_target</span>,
+216:           <span class="ruby-identifier">:src</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">''</span>,
+217:           <span class="ruby-identifier">:style</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'width:0px;height:0px;border:0'</span> 
+218:         })
+219:       <span class="ruby-keyword kw">end</span>
+220: 
+221:       <span class="ruby-identifier">tag</span>
+222:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000007" class="method-detail">
+        <a name="M000007"></a>
+
+        <div class="method-heading">
+          <a href="#M000007" class="method-signature">
+          <span class="method-name">upload_progress_status</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+The text and Javascript returned by the default <tt>upload_status</tt>
+controller action which will replace the contents of the div created by
+<tt><a
+href="UploadProgressHelper.html#M000005">upload_status_text_tag</a></tt>
+and grow the progress bar background to the appropriate width.
+</p>
+<p>
+See <tt><a
+href="UploadProgressHelper.html#M000009">upload_progress_text</a></tt> and
+<tt><a
+href="UploadProgressHelper.html#M000008">upload_progress_update_bar_js</a></tt>
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000007-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000007-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/upload_progress/lib/upload_progress_helper.rb, line 354</span>
+354:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">upload_progress_status</span>
+355:       <span class="ruby-node">&quot;#{upload_progress_text}&lt;script&gt;#{upload_progress_update_bar_js}&lt;/script&gt;&quot;</span>
+356:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000009" class="method-detail">
+        <a name="M000009"></a>
+
+        <div class="method-heading">
+          <a href="#M000009" class="method-signature">
+          <span class="method-name">upload_progress_text</span><span class="method-args">(state=nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Generates a nicely formatted string of current upload progress for +<a
+href="Progress.html">UploadProgress::Progress</a>+ object
+<tt>progress</tt>. Addtionally, it will return &quot;Upload
+starting&#8230;&quot; if progress has not been initialized, &quot;Receiving
+data&#8230;&quot; if there is no received data yet, and &quot;Upload
+finished&quot; when all data has been sent.
+</p>
+<p>
+You can overload this method to add you own output to the
+</p>
+<p>
+Example return: 223.5 KB of 1.5 MB at 321.2 KB/s; less than 10 seconds
+remaining
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000009-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000009-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/upload_progress/lib/upload_progress_helper.rb, line 392</span>
+392:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">upload_progress_text</span>(<span class="ruby-identifier">state</span>=<span class="ruby-keyword kw">nil</span>)
+393:       <span class="ruby-identifier">eval</span> <span class="ruby-keyword kw">case</span> 
+394:         <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">state</span> <span class="ruby-keyword kw">then</span> <span class="ruby-ivar">@@default_messages</span>[<span class="ruby-identifier">state</span>.<span class="ruby-identifier">to_sym</span>]
+395:         <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">upload_progress</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">upload_progress</span>.<span class="ruby-identifier">started?</span> <span class="ruby-keyword kw">then</span> <span class="ruby-ivar">@@default_messages</span>[<span class="ruby-identifier">:begin</span>]
+396:         <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">upload_progress</span>.<span class="ruby-identifier">finished?</span> <span class="ruby-keyword kw">then</span> <span class="ruby-ivar">@@default_messages</span>[<span class="ruby-identifier">:finish</span>]
+397:         <span class="ruby-keyword kw">else</span> <span class="ruby-ivar">@@default_messages</span>[<span class="ruby-identifier">:update</span>]
+398:       <span class="ruby-keyword kw">end</span> 
+399:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000008" class="method-detail">
+        <a name="M000008"></a>
+
+        <div class="method-heading">
+          <a href="#M000008" class="method-signature">
+          <span class="method-name">upload_progress_update_bar_js</span><span class="method-args">(percent=nil)</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Javascript helper that will create a script that will change the width of
+the background progress bar container. Include this in the script portion
+of your view rendered by your <tt>upload_status</tt> action to
+automatically find and update the progress bar.
+</p>
+<p>
+Example (in controller):
+</p>
+<pre>
+  def upload_status
+    render :inline =&gt; &quot;&lt;script&gt;&lt;%= update_upload_progress_bar_js %&gt;&lt;/script&gt;&quot;, :layout =&gt; false
+  end
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000008-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000008-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/upload_progress/lib/upload_progress_helper.rb, line 370</span>
+370:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">upload_progress_update_bar_js</span>(<span class="ruby-identifier">percent</span>=<span class="ruby-keyword kw">nil</span>)
+371:       <span class="ruby-identifier">progress</span> = <span class="ruby-identifier">upload_progress</span>
+372:       <span class="ruby-identifier">percent</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword kw">case</span> 
+373:         <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">progress</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-identifier">progress</span>.<span class="ruby-identifier">started?</span> <span class="ruby-keyword kw">then</span> <span class="ruby-value">0</span>
+374:         <span class="ruby-keyword kw">when</span> <span class="ruby-identifier">progress</span>.<span class="ruby-identifier">finished?</span> <span class="ruby-keyword kw">then</span> <span class="ruby-value">100</span>
+375:         <span class="ruby-keyword kw">else</span> <span class="ruby-identifier">progress</span>.<span class="ruby-identifier">completed_percent</span>
+376:       <span class="ruby-keyword kw">end</span>.<span class="ruby-identifier">to_i</span>
+377: 
+378:       <span class="ruby-comment cmt"># TODO do animation instead of jumping</span>
+379:       <span class="ruby-node">&quot;if($('#{progress_bar_id}')){$('#{progress_bar_id}').firstChild.firstChild.style.width='#{percent}%'}&quot;</span>
+380:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000006" class="method-detail">
+        <a name="M000006"></a>
+
+        <div class="method-heading">
+          <a href="#M000006" class="method-signature">
+          <span class="method-name">upload_status_progress_bar_tag</span><span class="method-args">(content='', options={})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Content helper that will create the element tree that can be easily styled
+with <tt>CSS</tt> to create a progress bar effect. The containers are
+defined as:
+</p>
+<pre>
+  &lt;div class=&quot;progressBar&quot; id=&quot;#{progress_bar_id}&quot;&gt;
+    &lt;div class=&quot;border&quot;&gt;
+      &lt;div class=&quot;background&quot;&gt;
+        &lt;div class=&quot;content&quot;&gt; &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+</pre>
+<p>
+The <tt>content</tt> parameter will be included in the inner most
+<tt>div</tt> when rendered.
+</p>
+<p>
+The <tt>options</tt> will create attributes on the outer most div. To use a
+different <tt>CSS</tt> class, pass a different class option.
+</p>
+<p>
+Example:
+</p>
+<pre>
+  &lt;%= upload_status_progress_bar_tag('', {:class =&gt; 'progress'}) %&gt;
+</pre>
+<p>
+Example <tt>CSS</tt>:
+</p>
+<pre>
+  div.progressBar {
+    margin: 5px;
+  }
+
+  div.progressBar div.border {
+    background-color: #fff;
+    border: 1px solid grey;
+    width: 100%;
+  }
+
+  div.progressBar div.background {
+    background-color: #333;
+    height: 18px;
+    width: 0%;
+  }
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000006-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000006-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/upload_progress/lib/upload_progress_helper.rb, line 337</span>
+337:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">upload_status_progress_bar_tag</span>(<span class="ruby-identifier">content</span>=<span class="ruby-value str">''</span>, <span class="ruby-identifier">options</span>={})
+338:       <span class="ruby-identifier">css</span> = [<span class="ruby-identifier">options</span>[<span class="ruby-identifier">:class</span>], <span class="ruby-value str">'progressBar'</span>].<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">join</span>(<span class="ruby-value str">' '</span>)
+339: 
+340:       <span class="ruby-identifier">content_tag</span>(<span class="ruby-value str">&quot;div&quot;</span>, 
+341:         <span class="ruby-identifier">content_tag</span>(<span class="ruby-value str">&quot;div&quot;</span>, 
+342:           <span class="ruby-identifier">content_tag</span>(<span class="ruby-value str">&quot;div&quot;</span>, 
+343:             <span class="ruby-identifier">content_tag</span>(<span class="ruby-value str">&quot;div&quot;</span>, <span class="ruby-identifier">content</span>, <span class="ruby-identifier">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'foreground'</span>),
+344:           <span class="ruby-identifier">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'background'</span>), 
+345:         <span class="ruby-identifier">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'border'</span>), 
+346:       {<span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">progress_bar_id</span>}.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>).<span class="ruby-identifier">merge</span>({<span class="ruby-identifier">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">css</span>}))
+347:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000004" class="method-detail">
+        <a name="M000004"></a>
+
+        <div class="method-heading">
+          <a href="#M000004" class="method-signature">
+          <span class="method-name">upload_status_tag</span><span class="method-args">(content='', options={})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Renders the HTML to contain the upload progress bar above the default
+messages
+</p>
+<p>
+Use this method to display the upload status after your <tt><a
+href="UploadProgressHelper.html#M000002">form_tag_with_upload_progress</a></tt>
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000004-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000004-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/upload_progress/lib/upload_progress_helper.rb, line 274</span>
+274:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">upload_status_tag</span>(<span class="ruby-identifier">content</span>=<span class="ruby-value str">''</span>, <span class="ruby-identifier">options</span>={})
+275:       <span class="ruby-identifier">upload_status_progress_bar_tag</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">upload_status_text_tag</span>(<span class="ruby-identifier">content</span>, <span class="ruby-identifier">options</span>)
+276:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000005" class="method-detail">
+        <a name="M000005"></a>
+
+        <div class="method-heading">
+          <a href="#M000005" class="method-signature">
+          <span class="method-name">upload_status_text_tag</span><span class="method-args">(content=nil, options={})</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Content helper that will create a <tt>div</tt> with the proper ID and class
+that will contain the contents returned by the <tt>upload_status</tt>
+action. The container is defined as
+</p>
+<pre>
+  &lt;div id=&quot;#{status_tag_id}&quot; class=&quot;uploadStatus&quot;&gt; &lt;/div&gt;
+</pre>
+<p>
+Style this container by selecting the +.uploadStatus+ <tt>CSS</tt> class.
+</p>
+<p>
+The <tt>content</tt> parameter will be included in the inner most
+<tt>div</tt> when rendered.
+</p>
+<p>
+The <tt>options</tt> will create attributes on the outer most div. To use a
+different <tt>CSS</tt> class, pass a different class option.
+</p>
+<p>
+Example <tt>CSS</tt>:
+</p>
+<pre>
+  .uploadStatus { font-size: 10px; color: grey; }
+</pre>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000005-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000005-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/upload_progress/lib/upload_progress_helper.rb, line 295</span>
+295:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">upload_status_text_tag</span>(<span class="ruby-identifier">content</span>=<span class="ruby-keyword kw">nil</span>, <span class="ruby-identifier">options</span>={})
+296:       <span class="ruby-identifier">content_tag</span>(<span class="ruby-value str">&quot;div&quot;</span>, <span class="ruby-identifier">content</span>, {<span class="ruby-identifier">:id</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">status_tag_id</span>, <span class="ruby-identifier">:class</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value str">'uploadStatus'</span>}.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>))
+297:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="section-bar">Protected Instance methods</h3>
+
+      <div id="method-M000011" class="method-detail">
+        <a name="M000011"></a>
+
+        <div class="method-heading">
+          <a href="#M000011" class="method-signature">
+          <span class="method-name">progress_bar_id</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Element ID of the progress bar
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000011-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000011-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/upload_progress/lib/upload_progress_helper.rb, line 409</span>
+409:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">progress_bar_id</span>
+410:       <span class="ruby-node">&quot;UploadProgressBar#{current_upload_id}&quot;</span>
+411:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000012" class="method-detail">
+        <a name="M000012"></a>
+
+        <div class="method-heading">
+          <a href="#M000012" class="method-signature">
+          <span class="method-name">status_tag_id</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Element ID of the progress status container
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000012-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000012-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/upload_progress/lib/upload_progress_helper.rb, line 414</span>
+414:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">status_tag_id</span>
+415:       <span class="ruby-node">&quot;UploadStatus#{current_upload_id}&quot;</span>
+416:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000013" class="method-detail">
+        <a name="M000013"></a>
+
+        <div class="method-heading">
+          <a href="#M000013" class="method-signature">
+          <span class="method-name">upload_target_id</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Element ID of the target &lt;iframe&gt; used as the target of the form
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000013-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000013-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/upload_progress/lib/upload_progress_helper.rb, line 419</span>
+419:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">upload_target_id</span>
+420:       <span class="ruby-node">&quot;UploadTarget#{current_upload_id}&quot;</span>
+421:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+      <div id="method-M000010" class="method-detail">
+        <a name="M000010"></a>
+
+        <div class="method-heading">
+          <a href="#M000010" class="method-signature">
+          <span class="method-name">upload_update_object</span><span class="method-args">()</span>
+          </a>
+        </div>
+      
+        <div class="method-description">
+          <p>
+Javascript object used to contain the polling methods and keep track of the
+finished state
+</p>
+          <p><a class="source-toggle" href="#"
+            onclick="toggleCode('M000010-source');return false;">[Source]</a></p>
+          <div class="method-source-code" id="M000010-source">
+<pre>
+     <span class="ruby-comment cmt"># File vendor/plugins/upload_progress/lib/upload_progress_helper.rb, line 404</span>
+404:     <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">upload_update_object</span>
+405:       <span class="ruby-node">&quot;document.uploadStatus#{current_upload_id}&quot;</span>
+406:     <span class="ruby-keyword kw">end</span>
+</pre>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div>
+
+
+<div id="validator-badges">
+  <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+</div>
+
+</body>
+</html>

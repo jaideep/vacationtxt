@@ -1,0 +1,41 @@
+<h1>Editing discount</h1>
+<% form_for :discount, :url=>{:action => :save_discount_changes, :id => @discount.id}, :html => { :multipart=>true } do |f|%>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :map_item_id %><br />
+    <%= f.text_field :map_item_id %>
+  </p>
+  <p>
+    <%= f.label :coupon_code %><br />
+    <%= f.text_field :coupon_code %>
+  </p>
+  <b>PICTURE</b>
+  <p>
+    <label for='image_file_data' >Image File:</label>		
+    <%= f.file_field :file_data %>	
+  </p>
+  <p>
+    <%= f.label :priority %><br />
+    <%= f.text_field :priority %>
+  </p>
+  <p>
+    <%= f.label :description %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label :start_date %><br />
+    <%= f.date_select :start_date %>
+  </p>
+  <p>
+    <%= f.label :end_date %><br />
+    <%= f.date_select :end_date %>
+  </p>
+  <p>
+    <%= f.label :sms_enabled %><br />
+    <%= f.check_box :sms_enabled %>
+  </p>
+  <p>
+    <%= f.submit "Update" %>
+  </p>
+<% end %>

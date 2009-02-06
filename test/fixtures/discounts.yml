@@ -1,0 +1,19 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  map_item_id: 1
+  coupon_code: MyString
+  priority: 1
+  description: MyText
+  start_date: 2008-10-19
+  end_date: 2008-10-19
+  sms_enabled: false
+
+two:
+  map_item_id: 1
+  coupon_code: MyString
+  priority: 1
+  description: MyText
+  start_date: 2008-10-19
+  end_date: 2008-10-19
+  sms_enabled: false

@@ -1,0 +1,91 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+ethans_condo:
+  id: 1
+  user_id: 1
+  street_address: 5020 S Maple Bluff Drive
+  city: Columbia
+  state: MO
+  zip: 65203
+  active: true
+  lat: 38.156453
+  long: -198.4531
+  description: beautiful condo by the lakeside
+  strong_name: Captains Condo
+  pricing_type: FIXED
+  region: North Shore
+
+ethans_cabin:
+  id: 2
+  user_id: 1
+  street_address: 123 West Bank Street
+  city: Lake of the Ozarks
+  state: MO
+  zip: 12345
+  active: true
+  lat: 38.156453
+  long: -197.4531 
+  description: cabin in the woods.  Two bedrooms!
+  strong_name: Hunting Cabin
+  pricing_type: FIXED
+  region: North Shore
+  
+ethans_appartment:
+  id: 3
+  user_id: 1
+  street_address: 911 North Shore Way
+  city: Lake of the Ozarks
+  state: MO
+  zip: 12345
+  active: false
+  lat: 38.156453
+  long: -198.51201
+  description: penthouse, baby
+  strong_name: El Presidente
+  pricing_type: FIXED
+  region: North Shore
+  
+bid_listing:
+  id: 4
+  user_id: 1
+  street_address: 911 North Shore Way
+  city: Lake of the Ozarks
+  state: MO
+  zip: 12345
+  active: true
+  lat: 38.156453
+  long: -198.51201
+  description: penthouse, baby
+  strong_name: What a place
+  pricing_type: BID
+  region: North Shore
+  
+seasonal_listing:
+  id: 5
+  user_id: 2
+  street_address: 911 North Shore Way
+  city: Lake of the Ozarks
+  state: MO
+  zip: 12345
+  active: true
+  lat: 38.156453
+  long: -198.51201
+  description: penthouse, baby
+  strong_name: Pearl Harbour
+  pricing_type: BID
+  region: North Shore
+
+olivers_appartment:
+  id: 6
+  user_id: 2
+  street_address: 911 North Shore Way
+  city: Lake of the Ozarks
+  state: MO
+  zip: 12345
+  active: false
+  lat: 38.156453
+  long: -198.51201
+  description: penthouse, baby
+  strong_name: City Hall
+  pricing_type: FIXED
+  region: North Shore

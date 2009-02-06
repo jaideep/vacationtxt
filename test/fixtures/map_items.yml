@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+mickey_ds:
+  id: 1
+  street_address: 5020 S Maple Bluff Drive
+  city: Columbia
+  state: MO
+  zip: 65203
+  name: McDonald's
+  description: Fast Food Joint
+  category: FOOD
+  website_url: http://www.mcdonalds.com
+  code: 201

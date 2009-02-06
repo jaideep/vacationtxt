@@ -1,0 +1,17 @@
+<div id="content-header">
+  <h1>Renter</h1>
+  <a href="#" onclick="hostPage('customer','see_rentals');">See Rentals</a>
+</div>
+
+<div id="getting-started">	
+  <%= error_messages_for :customer -%>
+  <% form_for :customer, :url => {:action => :save_preferences, :id => @customer} do |o|%>
+	<b>PREFERENCES</b>
+	<p>
+		Preferred number of double beds to search for: <%=o.text_field :default_search_double_count,:size=>1%><br/>
+        Preferred number of single beds to search for: <%=o.text_field :default_search_single_count,:size=>1%><br/>
+        Preferred maximum nightly price to search for: <%=o.text_field :default_search_max_price,:size=>3%>
+	</p>
+	<%= submit_tag("Save" ) %>
+  <% end %>
+</div>

@@ -1,0 +1,44 @@
+<style type="text/css">
+	td, th, tr, table{
+		border: solid thin black;
+	}
+</style>
+<h1>Listing Map Items</h1>
+<%= page_entries_info @items %>
+<table>
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Name</th>
+			<th>Category</th>
+			<th>Description</th>
+			<th>URL</th>
+			<th>Address</th>
+			<th>city</th>
+			<th>state</th>
+			<th>zip</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% for item in @items -%>
+			<tr>
+				<td><%= item.id%></td>
+				<td><%= item.name %></td>
+				<td><%= item.category %></td>
+				<td><%= item.description %></td>
+				<td><%= item.website_url %></td>
+				<td><%= item.street_address %></td>
+				<td><%= item.city %></td>
+				<td><%= item.state %></td>
+				<td><%= item.zip %></td>
+				<td>
+                                  <%= link_to "EDIT",:action=>:edit_map_item,:id=>item.id %>
+                                  <%= link_to "DISCOUNTS",:action=>:all_discounts,:id=>item.id %>
+                                </td>
+			</tr>
+		<% end -%>
+	</tbody>
+</table>
+<%= will_paginate @items %>
+

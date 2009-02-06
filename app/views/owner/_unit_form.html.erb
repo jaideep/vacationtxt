@@ -1,0 +1,16 @@
+<div class="pretty_form">	
+	<div class="pretty_form_header">Edit Unit for listing: <%=unit_form.listing.strong_name%></div>
+	<div class="pretty_form_body">
+  		<%= error_messages_for :unit -%>
+		<% form_for :unit, :url => {:action => post_action, :id => unit_form.id} do |l|%>
+			<p>Unit Name: <%= l.text_field :strong_name%></p>
+			<p>Price: <%= l.text_field :price,:size=>6%></p>
+			<p>Beds: <%= l.text_field :bed_count,:size=>5%></p>
+			<p>Capacity: <%= l.text_field :max_people,:size=>5%></p>
+			<p>Description:</p>
+			<p> <%= l.text_area :description,:rows=>5%></p>
+			<%= l.hidden_field :listing_id%>
+			<%= submit_tag("Save" ) %>
+	    <% end %>
+	</div>
+</div>

@@ -1,0 +1,38 @@
+<div id="content-header">
+  <h1>My Discounts</h1>
+</div>
+
+<div id="getting-started">
+  <h2>Here are all the disounts you are offering:</h2>  
+  <h3>TODO: Actually shows them all -- how can we map owners to discounts?</h2>  
+
+<%= page_entries_info @discounts %>
+<br/><br/>
+<table id="discounts" class="styled-tabular-data">
+  <thead>
+  <tr>
+    <th>Coupon code</th>
+    <th>Image</th>
+    <th>Description</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>Sms enabled</th>
+  </tr>
+  </thead>
+  <tbody>
+<% for discount in @discounts %>
+  <tr>
+    <td><%=h discount.coupon_code %></td>
+    <td><%= image_tag(discount.thumbnail_url) %></td>
+    <td><%=h discount.description %></td>
+    <td><%=h discount.start_date %></td>
+    <td><%=h discount.end_date %></td>
+    <td><%=h discount.sms_enabled %></td>
+  </tr>
+<% end %>
+</tbody>
+</table>
+<br />
+<%= will_paginate @discounts %>
+
+</div>

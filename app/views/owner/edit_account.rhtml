@@ -1,0 +1,28 @@
+<%=render(:partial=>"shared/header",:object=>nil,:locals=>{:no_styles=>false})%>
+<div class="page_body">
+	<%=link_to "Back to Account",:action=>:account,:controller=>:owner%>
+	<div class="pretty_form">
+		<div class="pretty_form_header">
+		  <b>Edit account</b>
+		</div>
+
+		<div class="pretty_form_body">
+	
+		  <%= error_messages_for :owner -%>
+		  <% form_for :owner, :url => {:action => :save_account_changes, :id => @owner} do |o|%>
+		    <b>CONTACT INFORMATION</b><br/>
+		    <p>Full Name:      <%= o.text_field :name, :size =>40 %></p>
+			<p>Email Address:  <%= o.text_field :email, :size => 30 %></p>
+			<p>Mobile Phone #: <%= o.text_field :phone%></p>
+			<b>LOCATION</b>
+			<p>Street Address: <%= o.text_field :street_address%></p>
+		    <p>City:           <%= o.text_field :city%></p>
+			<p>State:          <%= o.text_field :state, :size=>2%>&nbsp;
+			   Zip Code:       <%= o.text_field :zip, :size=>10%></p>
+			<b>WEBSITE INFO</b><br/>
+			<p>Password:       <%= o.text_field :password%></p>
+			<%= submit_tag("Save" ) %>
+		  <% end %>
+		</div>
+	</div>
+</div>

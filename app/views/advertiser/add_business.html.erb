@@ -1,0 +1,16 @@
+<%=render(:partial=>"shared/header",:object=>nil,:locals=>{:no_styles=>false})%>
+<div class="page_body">
+	<div class="pretty_form">
+		<div class="pretty_form_header">Add Business</div>
+		<div class="pretty_form_body">
+			<%form_tag :action=>:exec_request_brochure do -%>
+			  <p>Name:<%= text_field_tag :name%></p>
+			  <p>email:<%= text_field_tag :email_address%></p>
+			  <p>street address:<%= text_field_tag :mail_address%></p>
+			  <p>City:<%= text_field_tag :city%> State:<%= text_field_tag :state,nil,{:size=>2}%> Zip:<%= text_field_tag :zip,nil,{:size=>5}%></p>
+			  <p>Phone:<%= text_field_tag :phone%></p>
+			  <p><%=submit_tag "Submit"%></p>
+			<% end -%>
+		</div>
+	</div>
+</div>

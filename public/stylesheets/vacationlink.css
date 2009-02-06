@@ -1,0 +1,296 @@
+	 body {
+        margin: 0px;
+        margin-bottom: 25px;
+        padding: 0;
+        background-color: #f0f0f0;
+        font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
+        font-size: 13px;
+        color: #333;
+		/*background:url(/images/home_bg.gif) repeat-x;*/
+      }
+      
+      h1 {
+        font-size: 28px;
+        color: #000;
+      }
+      
+      a  {color: #03c}
+      a:hover {
+        background-color: #03c;
+        color: white;
+        text-decoration: none;
+      }
+	  
+/*------------------------HEADER STYLES---------------------------------*/
+      #header {
+      	text-align:center;
+		position: relative;
+		top: 50px;
+		font-family: "Copperplate Gothic Light";
+      }
+	  
+	  #badge {
+	  	float: left;
+		position: relative;
+		top: 0px;
+		left: 0px;
+	  }
+/*----------------------------------------------------------------------*/	  
+/*---------------------MAIN NAVIGATION STYLES---------------------------*/	    
+	  #SiteNav {
+	  	background: url(/images/nav_bg.gif);
+		background-repeat:repeat-y;
+		float:left;
+		width: 800px;
+		height:35px;
+	  }
+	  
+	  #SiteNav ul{
+		margin:0;
+		padding:0;
+	  }
+	  
+	  #SiteNav li{
+		line-height:35px;
+		float:left;
+		list-style:none;
+	  }
+      
+	  #SiteNav li a{
+		float:left;
+		color:#FFF;		
+		font-size:14px;
+		font-weight:bold;
+		width:115px;
+		height:35px;
+		text-align:center;
+		text-decoration:none;
+		white-space: nowrap;
+	  }
+	  
+	  #SiteNav li a:hover{
+		background-color: #efefef;
+		color:#8d8d8d;
+	  }
+/*---------------------------------------------------------------------*/
+/*------------------------BLUE_GRADIENT TABLE--------------------------*/
+     .styled-tabular-data {
+		border-collapse:collapse;
+		background:#EFF4FB url(/images/blue_table_gradient.gif) repeat-x;
+		border-left:1px solid #686868;				
+		border-right:1px solid #686868;				
+		font:0.9em/145% 'Trebuchet MS',helvetica,arial,verdana;				
+		color: #333;
+		width: 100%;
+	 }
+	 
+	 .styled-tabular-data td, th {		
+        padding:5px;
+		text-align:center;
+     }
+	 
+	 .styled-tabular-data thead{
+	 	background: url(/images/nav_bg.gif);
+		background-repeat:repeat-y;
+	 }
+	 
+	 .styled-tabular-data thead th, tfoot th, tfoot td {	 	
+		/*background:#333333; url(/images/table_header_border.gif) repeat-x;*/
+		color:#ffffff;
+	 }
+	 
+	 .styled-tabular-data tbody tr, tbody tr {
+		border-bottom: dotted 1px #333;
+     }
+
+	 .styled-tabular-data tbody th {
+		white-space: nowrap;
+	 }
+
+	.styled-tabular-data tbody th a {
+		color:#333;
+	}
+
+    .styled-tabular-data tbody tr:hover {
+		background:#A5A5A5
+    }
+
+/*---------------------------------------------------------------------*/
+	  #placeholder {
+	  	text-align: center;
+	  }
+	  
+	  #inline_buttons form, #inline_buttons form div{
+	  	display: inline;
+	  }
+	  
+      #vl_page {
+        background-color: #f0f0f0;
+        width: 870px;
+        margin: 0;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      #content {
+        float: left;
+		/*background-image: url(/images/page_bg.gif);*/
+		background-repeat: repeat-y;
+		margin:auto;
+        border-top: none;
+		padding-left: 25px;
+		padding-top: 5px;
+        width: 850px;
+		position: relative;
+      }
+      
+      #sidebar {
+        float: right;
+        width: 175px;
+      }
+
+	  #flash {
+	  	border: 2px solid red;
+		padding: 1em;
+		margin-bottom: 2em;
+		background-color: #f0f0f0 ;
+		font: bold smaller sans-serif;
+	  }
+	  
+      div#footer {
+        clear: both;
+		font-size: 9px;	
+		text-align: center;		
+      }	  
+	  
+	  div#footer hr{
+	  	width: 60%;
+	  }
+
+      #about, #getting-started {
+        padding-left: 0px;
+        padding-right: 30px;
+      }
+	  
+      #content-header h1, #content-header h2 {margin: 0}
+	  
+      #content-header h2 {
+        font-weight: bolder;
+        font-size: 18px;
+      }
+      
+      
+      #about h3 {
+        margin: 0;
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+      
+      #about-content {
+        background-color: #ffd;
+        border: 1px solid #fc0;
+        margin-left: -11px;
+      }
+      #about-content table {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        font-size: 11px;
+        border-collapse: collapse;
+      }
+      #about-content td {
+        padding: 10px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+      }
+      #about-content td.name  {color: #555}
+      #about-content td.value {color: #000}
+      
+      #about-content.failure {
+        background-color: #fcc;
+        border: 1px solid #f00;
+      }
+      #about-content.failure p {
+        margin: 0;
+        padding: 10px;
+      }
+      
+	  #errorExplanation {
+	  	border-style: double;
+		border-color: Black;
+	  }
+	  
+	  #errorExplanation p{
+	  	color: Red;
+	  }
+	  	  
+	  #errorExplanation li{
+	  	font-size: smaller;
+		color: Red;
+	  }
+      
+      #getting-started {
+        margin-top: 0px;
+        padding-top: 15px;
+      }
+      #getting-started h1 {
+        margin: 0;
+        font-size: 20px;
+      }
+      #getting-started h2 {
+        margin: 0;
+        font-size: 14px;
+        font-weight: normal;
+        color: #333;
+        margin-bottom: 25px;
+      }
+      #getting-started ol {
+        margin-left: 0;
+        padding-left: 0;
+      }
+      #getting-started li {
+        font-size: 18px;
+        color: #888;
+        margin-bottom: 25px;
+      }
+      #getting-started li h2 {
+        margin: 0;
+        font-weight: normal;
+        font-size: 18px;
+        color: #333;
+      }
+      #getting-started li p {
+        color: #555;
+        font-size: 13px;
+      }
+      
+      
+      #search {
+        margin: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        font-size: 11px;
+      }
+      #search input {
+        font-size: 11px;
+        margin: 2px;
+      }
+      #search-text {width: 170px}
+      
+      
+      #sidebar ul {
+        margin-left: 0;
+        padding-left: 0;
+      }
+      #sidebar ul h3 {
+        margin-top: 25px;
+        font-size: 16px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+      }
+      #sidebar li {
+        list-style-type: none;
+      }
+      #sidebar ul.links li {
+        margin-bottom: 5px;
+      }
+	  

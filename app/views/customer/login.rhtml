@@ -1,0 +1,22 @@
+<%=render(:partial=>"shared/header",:object=>nil,:locals=>{:no_styles=>false})%>
+
+<div class="page_body">
+	<div class="pretty_form" style="width:400px;">
+		<div class="pretty_form_header"><b>Login</b></div>
+		<div class="pretty_form_body">
+	  		<% form_tag :action=>:activate_login do -%>
+				  <table>
+				  	<tr>
+				  		<td>email address:</td><td> <%= text_field_tag :username,params[:username]%></td>
+				  	</tr>
+					<tr>
+				  		<td>password:</td><td>  <%= password_field_tag :password,params[:password]%></td>
+				  	</tr>
+				  </table>  
+				  <%= submit_tag "Login"%>
+			  <% end -%>
+  
+			  <p>If you haven't created an account yet, you can <%=link_to "register here",:action=>:register%></p>
+		</div>
+	</div>
+</div>

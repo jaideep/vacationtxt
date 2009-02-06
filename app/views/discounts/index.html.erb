@@ -1,0 +1,27 @@
+<h1>Listing discounts</h1>
+
+<table>
+  <tr>
+    <th>Map item</th>
+    <th>Coupon code</th>
+    <th>Priority</th>
+    <th>Description</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>Sms enabled</th>
+  </tr>
+
+<% for discount in @discounts %>
+  <tr>
+    <td><%=h discount.map_item_id %></td>
+    <td><%=h discount.coupon_code %></td>
+    <td><%=h discount.priority %></td>
+    <td><%=h discount.description %></td>
+    <td><%=h discount.start_date %></td>
+    <td><%=h discount.end_date %></td>
+    <td><%=h discount.sms_enabled %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />

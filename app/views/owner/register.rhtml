@@ -1,0 +1,31 @@
+<div id="content-header">
+  <h1>Register</h1>
+  <h2>Enter info and press "Register"</h2>
+</div>
+
+<div id="getting-started">
+	
+  <%= error_messages_for :owner -%>
+  <% form_for :owner, :url => {:action => :activate_registration, :id => @owner} do |o|%>
+    <b>CONTACT INFORMATION</b><br/>
+    <p>Full Name:      <%= o.text_field :name, :size =>40 %></p>
+	<p>Email Address:  <%= o.text_field :email, :size => 30 %></p>
+	<p>Mobile Phone #: <%= o.text_field :phone%></p>
+	<b>LOCATION</b>
+	<p>Street Address: <%= o.text_field :street_address%></p>
+    <p>City:           <%= o.text_field :city%></p>
+	<p>State:          <%= o.text_field :state, :size=>2%>&nbsp;
+	   Zip Code:       <%= o.text_field :zip, :size=>10%></p>
+	<b>WEBSITE INFO</b><br/>
+	<p>Password:       <%= o.text_field :password%></p>
+	<b>PREFERENCES</b>
+	<p>Contact me by Phone (time of day)<br/>
+	  <i>start</i> <%= o.select :call_me_start_time, VacationLinkTime.options%> <i>end</i> <%= o.select :call_me_stop_time, VacationLinkTime.options%>
+	</p>
+	<p>Contact me by Text Message (time of day)<br/>	  
+      <i>start</i> <%= o.select :text_me_start_time, VacationLinkTime.options%> <i>end</i> <%= o.select :text_me_stop_time, VacationLinkTime.options%>
+	</p>
+	<p>notify me by email of failed contact attempts: <%= o.check_box :notify_of_failed, {}, true,false%></p>
+	<%= submit_tag("Register" ) %>
+  <% end %>
+</div>

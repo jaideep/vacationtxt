@@ -1,0 +1,17 @@
+<h1>New Map Item</h1>
+
+<%= error_messages_for :item -%>
+<% form_for :item, :url=>{:action => :exec_add_map_item} do |l|%>
+	<b>LOCATION INFORMATION</b><br/>
+	<p>Street Address: <%= l.text_field :street_address%></p>
+	<p>City:           <%= l.text_field :city%></p>
+	<p>State:          <%= l.text_field :state, :size=>2%>&nbsp;
+	   Zip Code:       <%= l.text_field :zip, :size=>10%></p>	
+	<br/>	
+	<b>OTHER INFO</b><br/>
+	<p>Name: <%= l.text_field :name%></p>
+	<p>Category: <%= l.select :category,MapItem.categories%></p>
+	<p>Website URL (optional): <%= l.text_field :website_url%></p>
+	<p>Description: <br/> <%= l.text_area :description,:rows=>5%></p>
+<%= submit_tag("SUBMIT") %>
+<% end %>

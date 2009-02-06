@@ -1,0 +1,15 @@
+<%= stylesheet_link_tag 'account'%>
+<%=render(:partial=>"shared/header",:object=>nil,:locals=>{:no_styles=>false})%>
+<div class="page_body">
+	<div class="pretty_form" style="width:400px;">
+		<div class="pretty_form_header">Vacationstxt.com Feedback Form</div>
+		<div class="pretty_form_body">
+			<p>We appreciate any feedback you can give us about our product.  How are we doing?  Is there something that isn't working for you? Something you'd change?  A new feature you'd like to see?  Here's you're chance to let us know!</p>
+			<% form_tag :action => :exec_report_issue do %>
+				Comments:<br/>
+				<%= text_area_tag(:comments,nil,{:cols=>50,:rows=>20})%><br/>
+				<%= submit_tag "Submit"%>
+			<% end %>
+		</div>
+	</div>
+</div>

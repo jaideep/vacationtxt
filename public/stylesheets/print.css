@@ -1,0 +1,22 @@
+#header,#welcome_sign,#flash {
+	display: none;
+	}
+
+a,h1,h2 {
+	display: none;
+	}
+	
+body {
+	background: white;
+	font-size: 10pt;
+}
+
+
+#wrapper, #content {
+	width: auto;
+	border: 0;
+	margin: 0 5%;
+	padding: 0;
+	float: none !important;
+	}
+

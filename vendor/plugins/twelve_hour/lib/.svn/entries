@@ -1,0 +1,29 @@
+8
+
+dir
+834
+http://svn2.hosted-projects.com/evizitei/TherapyLogs/vendor/plugins/twelve_hour/lib
+http://svn2.hosted-projects.com/evizitei/TherapyLogs
+
+
+
+2008-12-01T15:30:22.756661Z
+742
+ethan
+
+
+svn:special svn:externals svn:needs-lock
+
+twelve_hour.rb
+file
+
+
+
+
+2008-12-01T15:26:37.000000Z
+61059c71cb65b3491718ce8640fcb176
+2008-12-01T15:30:22.756661Z
+742
+ethan
+has-props
+

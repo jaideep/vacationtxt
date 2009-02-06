@@ -1,0 +1,49 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+ethans_condo:
+  id: 1
+  listing_id: 1
+  bed_count: 1
+  max_people: 1
+  price: 100
+  strong_name: Captains Condo
+
+ethans_cabin:
+  id: 2
+  listing_id: 2
+  bed_count: 2
+  max_people: 2
+  price: 200
+  strong_name: Hunting Cabin
+  
+ethans_appartment:
+  id: 3
+  listing_id: 3
+  bed_count: 0
+  max_people: 1
+  price: 300
+  strong_name: El Presidente
+  
+bid_listing:
+  id: 4
+  listing_id: 4
+  bed_count: 0
+  max_people: 1
+  price: 300
+  strong_name: What a place
+  
+seasonal_listing:
+  id: 5
+  listing_id: 5
+  bed_count: 0
+  max_people: 1
+  price: 300
+  strong_name: Pearl Harbour
+
+olivers_appartment:
+  id: 6
+  listing_id: 6 
+  bed_count: 0
+  max_people: 1
+  price: 300
+  strong_name: City Hall

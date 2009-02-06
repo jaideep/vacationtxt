@@ -1,0 +1,23 @@
+<%=render(:partial=>"shared/header",:object=>nil,:locals=>{:no_styles=>false})%>
+
+<div class="page_body">
+	<div class="pretty_form">
+		<div class="pretty_form_header"><b>Register</b></div>
+		<div class="pretty_form_body">
+		  <%= error_messages_for :customer -%>
+		  <% form_for :customer, :url => {:controller=>:customer,:action => :activate_registration, :id => @customer} do |c|%>
+		    <b>CONTACT INFORMATION</b><br/>
+		    <p>Full Name:      <%= c.text_field :name, :size =>40 %>&nbsp;&nbsp;
+			   Mobile Phone #: <%= c.text_field :phone%></p>
+			<p>Email Address:  <%= c.text_field :email, :size => 30 %>&nbsp;&nbsp;
+			   Password:       <%= c.text_field :password%></p>	
+			<b>LOCATION</b>
+			<p>Street Address: <%= c.text_field :street_address%></p>
+		    <p>City:           <%= c.text_field :city%>&nbsp;&nbsp;
+			   State:          <%= c.text_field :state, :size=>2%>&nbsp;&nbsp;
+			   Zip Code:       <%= c.text_field :zip, :size=>10%></p>
+			<%= submit_tag("Register" ) %>   
+		  <% end %>
+		</div>
+	</div>
+</div>

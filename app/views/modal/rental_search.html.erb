@@ -1,0 +1,36 @@
+<b><i>Vacation Rental Search</i></b>
+<br/>
+<div id="search_form">
+	<%form_remote_tag :url=>{:action=>:remote_map_search,:rand=>rand(1000000),:controller=>:main},:complete=>"showSearchResults(request)" do-%>
+	    <table>
+			<tbody>
+				<tr>
+					<td>How Many Beds?</td>
+					<td><input class="home_input" type="text" id="bed_count" name="bed_count" value="<%=@param_map[:bed_count]%>"/></td>
+				</tr>
+				<tr>
+					<td>How Many People?</td>
+					<td><input class="home_input" type="text" id="max_people" name="max_people" value="<%=@param_map[:max_people]%>"/></td>
+				</tr>
+				<tr>
+					<td>Maximum Nightly Rate?&nbsp;&nbsp;&nbsp;&nbsp;$</td>
+					<td><input class="home_input" type="text" id="max_price" name="max_price" value="<%=@param_map[:max_price]%>"/></td>
+				</tr>
+				<tr>
+					<td>Lake Region?</td>
+					<td>
+						<select id="region" name="region" value="<%=@param_map[:region]%>">
+							<option value="ALL">Any Region</option>
+							<% Listing::REGIONS.each do |region|%>
+							  <option value="<%=region%>" <%= (region == @param_map[:region]) ? "selected='selected'" : ""%>><%=region%></option>
+							<% end %>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="Search"></td>
+				</tr>
+			</tbody>
+		</table>
+	<% end -%>
+</div>

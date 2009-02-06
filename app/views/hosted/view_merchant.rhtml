@@ -1,0 +1,16 @@
+<div id="content-header">
+  <h4>Details for merchant: <%= @item.name -%></h4>
+</div>
+
+<div id="getting-started">	
+	<div id="listing_details">
+		<p><b>Description:</b> <%= @item.description -%></p>
+		<% if @item.website_url -%>
+		  <p><b>Website:</b> <a href="<%=@item.website_url -%>"><%= "#{@item.website_url}" -%></a></p>
+		<% end -%>
+		<p><b>Street Address:</b> <br/> <%=@item.street_address -%><br/>
+			<%=@item.city%>, <%=@item.state%>, <%=@item.zip%></p>
+		<p><b>Category:</b><%=@item.category%></p>
+		<p><b>Phone:</b><%=@item.phone%></p>
+	</div>
+</div>

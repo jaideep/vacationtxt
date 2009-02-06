@@ -1,0 +1,18 @@
+<div id="content-header">
+  <h1>Welcome Back!</h1>
+</div>
+
+<div id="getting-started">
+  <h1>Account Info:</h1>
+  <h2>Here is all the information about your account:</h2>
+  <p>
+  	<b>Name:</b><%=@customer.name%>	<br/><br/>
+	<b>Address:</b><%=@customer.street_address%><br/><br/>
+	<b>City:</b><%=@customer.city%>&nbsp;&nbsp;
+	<b>State:</b><%=@customer.state%>&nbsp;&nbsp;
+	<b>Zip:</b><%=@customer.zip%><br/><br/>
+	<b>email:</b><%=@customer.email%><br/><br/>
+	<b>mobile phone:</b><%=@customer.phone%>
+  </p>
+  <p><a href="#" onclick="hostPage('customer','edit_account')">Edit Details</a></p>
+</div>

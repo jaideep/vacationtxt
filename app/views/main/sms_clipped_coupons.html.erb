@@ -1,0 +1,14 @@
+<h2><%= link_to "Back to main discounts page", :action => "discounts"%></h2>
+<h1>SMS Clipped Coupons</h1>
+<% form_tag 'sms_send_clipped_coupons' do %>
+Phone number: <%= text_field_tag 'phone_number', "" %><br />
+<%= submit_tag "Send"%>
+<% end %>
+
+<table>
+  <% for discount_group in @sms_enabled_coupons.in_groups_of(2) %>
+  <tr>
+    <%= render(:partial => "printable_coupon" , :collection => discount_group) %></div>    
+  </tr>
+  <% end %>
+</table>

@@ -1,0 +1,17 @@
+<% if printable_coupon %>
+<% discount = printable_coupon %>
+<td class="<%= 'row_' + discount.category %>">
+  
+  <% check_box('item_' + discount.id.to_s, 'unchecked',  {}, '', '') %>
+  <%= image_tag(discount.url, :size=>"150x150") %><br/>
+    
+  <b><%=h discount.category %></b>
+  <%=h discount.description %>
+  <p><%=h discount.start_date %> through <%=h discount.end_date %></p>
+  <% if discount.sms_enabled %>
+  <p>SMS supported</p>
+  <% end %>
+  <p>Coupon code: <%=h discount.coupon_code %></p>
+  
+</td>
+<% end %> 

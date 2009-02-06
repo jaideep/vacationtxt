@@ -1,0 +1,76 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+ethan:
+  id: 1
+  password: y1d2k3
+  name: Ethan Vizitei
+  email: ethan.vizitei@gmail.com
+  phone: 15732395840
+  street_address: 2275 E Bearfield Subdivision
+  city: columbia
+  state: MO
+  zip: 65201      
+  default_search_single_count: 1
+  default_search_double_count: 1
+  default_search_max_price: 500
+  call_me_start_time: 9
+  call_me_stop_time: 17
+  text_me_start_time: 6
+  text_me_stop_time: 22
+
+oliver:
+  id: 2
+  password: secret
+  name: Oliver Vizitei
+  email: oliver@vizitei.com
+  phone: 15731234567
+  street_address: 159 Station Eight
+  city: columbia
+  state: MO
+  zip: 65203
+  default_search_single_count: 1
+  default_search_double_count: 1
+  default_search_max_price: 500  
+  call_me_start_time: 9
+  call_me_stop_time: 17
+  text_me_start_time: 6
+  text_me_stop_time: 22
+
+
+charvel:
+  id: 3  
+  password: secret
+  name: Charvel Vizitei
+  email: charvel.vizitei@gmail.com
+  phone: 15738649928
+  street_address: 2275 E Bearfield Subdivision
+  city: columbia
+  state: MO
+  zip: 65201
+  response_preference: text
+  default_search_single_count: 1
+  default_search_double_count: 1
+  default_search_max_price: 500
+  call_me_start_time: 9
+  call_me_stop_time: 17
+  text_me_start_time: 6
+  text_me_stop_time: 22
+
+nadia:
+  id: 4 
+  password: passwd
+  name: Nadia Vizitei
+  email: nadia.vizitei@gmail.com
+  phone: 15739876543
+  street_address: 5020 Maple Bluff Drive
+  city: columbia
+  state: MO
+  zip: 65203
+  response_preference: email
+  default_search_single_count: 1
+  default_search_double_count: 1
+  default_search_max_price: 500
+  call_me_start_time: 9
+  call_me_stop_time: 17
+  text_me_start_time: 6
+  text_me_stop_time: 22

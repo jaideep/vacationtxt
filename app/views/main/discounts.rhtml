@@ -1,0 +1,72 @@
+<%=render(:partial=>"shared/header",:object=>nil,:locals=>{:no_styles=>false})%>
+<%= javascript_include_tag "jquery"%>
+<%= javascript_include_tag "application" %>
+<%= javascript_include_tag "prototype"%>
+<%= javascript_include_tag "effects"%>
+<div class="page_body">
+	<script type="text/javascript">
+	  var selectedCat = "none";
+
+	  /* TODO: Clean this up. Categories should not be stored in the id field.*/
+	  function selectCat() {
+	    jQuery(".cb").each(function() {
+	      var box = this;
+	      var cat = box.id;
+	      var rows = jQuery("td.row_" + cat);
+	      if (box.checked) {
+	        rows.css({background:"yellow"});
+	      }
+	      else {
+	        rows.css({background:""});
+	      }
+	    });    
+	  }
+	  jQuery(document).ready(selectCat);
+	</script>
+	<div class="pretty_form" style="width:800px;">
+		<div class="pretty_form_header">
+			<b>VacationsTXT Discount Section</b>
+		</div>
+		<div class="pretty_form_body">
+			<p><%= 
+			      if @map_item 
+			        "Discounts for advertiser " + @map_item + ". " + 
+			          (link_to "(View for all)", :action => :discounts)
+			      else
+			        "All advertisers."
+			      end
+			      %>
+			</p>
+			<table>
+			<% for category_group in MapItem::CATEGORY_OPTIONS.in_groups_of(3) %>
+			  <tr>
+			    <% for category in category_group %>
+			    <td><%= category %></td>
+			    <td><%= check_box('cat_' + category, 'unchecked', {:id=>category, :class=>"cb", :onclick=>"selectCat();"}, '', '') %>
+			    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			    </td>
+			    <% end %>
+			  </tr>
+			<% end %>
+			</table>
+		</div>
+	</div>
+	<%=link_to "Back to Map",:action=>:welcome%>
+	<br/>
+	<%= page_entries_info @discounts %>
+<div class="pretty_form" style="width:800px;">
+	<table id="discounts_table" class="pretty_table">
+	  <% for discount_group in @discounts.in_groups_of(2) %>
+	  <tr class="<%=cycle("pretty_tr_one","pretty_tr_two")%>">
+	    <%= render(:partial => "coupon" , :collection => discount_group) %></div>    
+	  </tr>
+	  <% end %>
+	</table>
+</div>
+	<br/>
+	<%= will_paginate @discounts %>
+	<br />
+
+	<div class="pretty_form" id="coupon_cart" style="width:800px;"><%= render(:partial => "coupon_cart" , :object => @clipped_coupons) %></div>
+
+</div>

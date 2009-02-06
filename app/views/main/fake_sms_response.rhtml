@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+		<title>Received SMS Emulator (Via HTTP POST)</title>
+	</head>
+	<body>
+		<form id="emulator" name="emulator" method="post" action="/main/process_sms">
+			<table>
+				<tr>
+					<td>Sender:</td>
+					<td>
+						<input name="sender" type="text" id="sender" value="15732395840"/>
+					</td>
+					<td>sender</td>
+				</tr>
+				<tr>
+					<td>Message:</td>
+					<td>
+						<input name="data" type="text" id="data" value="Y 1"/>
+					</td>
+					<td>data</td>
+				</tr>
+				<tr>
+					<td>User Name:</td>
+					<td>
+						<input name="name" type="text" id="name" value="evizitei"/>
+					</td>
+					<td>name</td>
+				</tr>
+				<tr>
+					<td colspan="2" align="right">
+						<input type="submit" name="Submit" value="Submit"/>
+					</td>
+					<td>&nbsp;</td>
+				</tr>
+			</table>
+		</form>
+	</body>
+</html>

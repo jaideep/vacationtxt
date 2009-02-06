@@ -1,0 +1,80 @@
+
+<%= stylesheet_link_tag 'listing_calendar' %>
+<%= stylesheet_link_tag 'calendariffic/calendar-blue.css' %>
+<%=render(:partial=>"shared/header",:object=>nil,:locals=>{:no_styles=>false})%>
+<%= javascript_include_tag 'calendariffic/calendar.js','calendariffic/calendar-setup.js', 'calendariffic/lang/calendar-en.js'%>
+
+<div class="page_body">
+	<%=link_to "My Listings",:action=>:see_listings%><br/>
+	<%=link_to "Listing for  #{@unit.listing.strong_name}",:action=>:edit_listing,:controller=>:owner,:id=>@unit.listing_id%>
+	<div class="pretty_form" style="width:500px;">
+		<div class="pretty_form_header">Calendar for "<%=@unit.strong_name%>"</div>
+		<div class="pretty_form_body">
+			<div id="calendar_header" style="text-align:center">
+		
+				<div><b><%=@year%></b></div>
+			</div>
+			<% if flash[:notice] -%>
+			  <div id="flash"><%= flash[:notice] %></div>
+			<% end -%>
+			<div class="calendar_holder">
+				<div id="previous_month_button" class="home_page_button">
+			    	<%= link_to image_tag('arrow_back.png', :alt=>'Previous Month'),getPreviousMonthCalendarParams(@year,@month)-%>
+				</div>
+				<div id="calendar_div">
+					<%= calendar({:year => @year, :month => @month}) do |d| 
+				 			[d.mday, {:class => getCssClassForDay(d,@item)}]
+				        end %>
+				</div>
+				<div id="next_month_button" class="home_page_button">
+					<%= link_to image_tag('arrow_forward.png', :alt=>'Next Month'),getNextMonthCalendarParams(@year,@month)-%>
+				</div>
+			</div>
+		</div>
+		<div class="pretty_form_header">Key</div>
+		<div class="pretty_form_body">
+			<div id="calendar_key">
+				<table>
+					<tbody>
+						<tr>
+							<td style="background-color:red">&nbsp;&nbsp;</td>
+							<td>Unavailable</td>
+							<td style="background-color:green">&nbsp;&nbsp;</td>
+							<td>Available</td>
+							<td style="background-color:white;border:black 1px solid;">&nbsp;&nbsp;</td>
+							<td>Check With Me</td>
+							<td style="background-color:#003355">&nbsp;&nbsp;</td>
+							<td>Today</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>	
+		</div>
+		<div class="pretty_form_header">Add a Calendar Item</div>
+		<div class="pretty_form_body">
+			<div id="add_cal_item_form">
+				<%form_tag :action=>:add_calendar_item,:id=>@unit do -%>
+					<table>
+						<tbody>
+							<tr>
+								<td>Start Date:</td>
+								<td><%= calendariffic_input(false,"cal_start_date","/images/calendariffic/date.png","cal_start_img",'%Y/%m/%d',params[:cal_start_date],{:readonly=>'true',:size=>'10'},{:alt => 'cal'})%></td>
+							</tr>
+							<tr>
+			            		<td>Stop Date:</td>
+								<td><%= calendariffic_input(false,"cal_stop_date","/images/calendariffic/date.png","cal_stop_img",'%Y/%m/%d',params[:cal_stop_date],{:readonly=>'true',:size=>'10'},{:alt => 'cal'})%></td>
+							</tr>
+							<tr>
+								<td>Period Status:</td>
+								<td><%= select_tag "period_type",options_for_select(["AVAILABLE","UNAVAILABLE","CHECK WITH ME"],params[:period_type])%></td>
+							</tr>
+							<tr>
+								<td style="colspan:2"><%=submit_tag "Add"%></td>
+							</tr>
+						</tbody>
+					</table>		
+				<%end-%>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,25 @@
+div#account_actions{
+	position: absolute;
+	top: 0px;
+	left: 325px;
+	width: 250px;
+	max-width: 250px;
+}
+
+div#account_info{
+	position: absolute;
+	top: 0px;
+	left: 5px;
+	width: 300px;
+	max-width: 300px;
+}
+
+div.account_action{
+	position: relative;
+	height: 55px;
+	max-height: 55px;
+}
+
+div.account_action img{
+	float:left;
+}

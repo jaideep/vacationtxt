@@ -1,0 +1,20 @@
+<div id="content-header">
+  <h1>Owner</h1>
+  <a href="#" onclick="hostPage('owner','see_listings');">See Listings</a>
+</div>
+
+<div id="getting-started">
+	
+  <%= error_messages_for :owner -%>
+  <% form_for :owner, :url => {:action => :save_preferences, :id => @owner} do |o|%>
+	<b>PREFERENCES</b>
+	<p>Contact me by Phone (time of day)<br/>
+	  <i>start</i> <%= o.select :call_me_start_time, VacationLinkTime.options%> <i>end</i> <%= o.select :call_me_stop_time, VacationLinkTime.options%>
+	</p>
+	<p>Contact me by Text Message (time of day)<br/>	  
+      <i>start</i> <%= o.select :text_me_start_time, VacationLinkTime.options%> <i>end</i> <%= o.select :text_me_stop_time, VacationLinkTime.options%>
+	</p>
+	<p>notify me by email of failed contact attempts: <%= o.check_box :notify_of_failed, {}, true,false%></p>
+	<%= submit_tag("Save" ) %>
+  <% end %>
+</div>

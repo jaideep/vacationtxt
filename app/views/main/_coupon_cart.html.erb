@@ -1,0 +1,11 @@
+<div class="cart-title pretty_form_header">Clipped:</div>
+<div class="pretty_form_body">
+	<table class="pretty_table">
+	  <%= render(:partial => "clipped_coupon" , :collection => coupon_cart) %>
+	</table>
+</div>
+<div id="cart_buttons" class="pretty_form_header">
+	<%= button_to "Print" ,{:action => :print_clipped_coupons},{:style=>"display:inline;"} %>
+	<%= button_to "SMS" , {:action => :sms_clipped_coupons},{:style=>"display:inline;"} %>
+	<%= button_to "Clear" ,{:action => :clear_clipped_coupons},{:style=>"display:inline;"} %>
+</div>

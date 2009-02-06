@@ -1,0 +1,35 @@
+<% if no_styles == false%>
+	<%= stylesheet_link_tag 'home' %>
+	<%= stylesheet_link_tag 'pretty_form'%>
+	
+<% end %>
+<div class="navlist">
+Your Web Portal to the Lake - <i>We connect you with all services at the lake!</i>
+</div>
+<div id="top_banner">
+	<h2 id="title">
+		<a href="/main/welcome">
+		<div id="header">
+			Vacation Rentals
+		</div>
+		<div id="subheader">
+			Lake of the Ozarks, Missouri
+		</div>
+		</a>
+	</h2>
+</div>	
+<div id="navcontainer">
+	<ul class="navlist">
+		<li><a id="search_map" href="/">Search Map</a></li>
+		<li><a href="/main/discounts" id="discounts">Browse Discounts </a></li>
+		<li><a href="/faq/index" id="faq">Frequently Asked Questions</a></li>
+		<li class="last"><a id="contact" href="/main/contact_us">Contact Us</a></li>
+	</ul>
+	<% if @customer -%>
+	<ul id="accountNav" class="navlist">
+		<li><%=link_to "My Account",:action=>:account,:controller=>:owner%></li>
+		<li><%=link_to "Logout",:action=>:logout,:controller=>:owner%></li>
+	</ul>
+	<%- end %>
+	<div class="clearer"></div> 
+</div>

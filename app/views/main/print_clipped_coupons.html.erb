@@ -1,0 +1,13 @@
+<h2><%= link_to "Back to main discounts page", :action => "discounts"%></h2>
+<h1>Printing Clipped Coupons</h1>
+<p><%= link_to_function "Print this Page", "javascript:print()" %></p>
+<p><%= link_to "SMS all to phone", :action => :sms_clipped_coupons %></p>
+
+<table>
+  <% for discount_group in @clipped_coupons.in_groups_of(2) %>
+  <tr>
+    <%= render(:partial => "printable_coupon" , :collection => discount_group) %></div>    
+  </tr>
+  <% end %>
+</table>
+
